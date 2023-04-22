@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.abc.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_my_staging"
+        android:name="com.example.abc.ui.mystaging.MyStagingFragment"
+        android:label="@string/title_staging"
+        tools:layout="@layout/fragment_my_staging" />
+
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.abc.ui.user.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/navigation_services"
+        android:name="com.example.abc.ui.ServicesFragment"
+        android:label="Services"
+        tools:layout="@layout/fragment_services" />
+    <fragment
+        android:id="@+id/navigation_fast_order"
+        android:name="com.example.abc.ui.FastOrderFragment"
+        android:label="FastOrder"
+        tools:layout="@layout/fragment_fast_order" />
+</navigation>

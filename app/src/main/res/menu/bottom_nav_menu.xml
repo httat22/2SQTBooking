@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_services"
+        android:icon="@drawable/service"
+        android:title="@string/title_service" />
+
+    <item
+        android:id="@+id/navigation_fast_order"
+        android:icon="@drawable/fastbooking"
+        android:title="@string/title_fast_order" />
+
+    <item
+        android:id="@+id/navigation_my_staging"
+        android:icon="@drawable/mystaying"
+        android:title="@string/title_staging" />
+
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/profile"
+        android:title="@string/title_user" />
+
+</menu>
