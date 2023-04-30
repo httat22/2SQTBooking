@@ -1,16 +1,22 @@
 package com.example.abc.models;
 
 public class RoomModel {
-    int image;
-    String description, price;
-    public int getImage() {
-        return image;
+    int id;
+
+
+
+    String description, price, imageURL;
+
+    public RoomModel() {
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getDescription() {
         return description;
     }
@@ -27,9 +33,18 @@ public class RoomModel {
         this.price = price;
     }
 
-    public RoomModel(int image, String description, String price) {
-        this.image = image;
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public RoomModel(int id, String description, String imageURL, String price) {
+        this.id = id;
         this.description = description;
         this.price = price;
+        this.imageURL = imageURL;
     }
 }

@@ -20,7 +20,7 @@ public class ReserveFastBookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_fast_booking);
-
+        getSupportActionBar().hide();
         initUI();
     }
 

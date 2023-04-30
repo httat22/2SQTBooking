@@ -7,7 +7,8 @@
     android:fillViewport="true"
     android:background="@color/white"
     tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="1dp">
+    tools:layout_editor_absoluteY="1dp"
+    tools:context=".activities.ReserveTennisActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             app:srcCompat="@drawable/tennisreserve" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/btnHome"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
@@ -65,7 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
