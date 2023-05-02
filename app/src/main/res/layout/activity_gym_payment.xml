@@ -140,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnBack"
         tools:srcCompat="@drawable/leftarrow"
         android:layout_width="56dp"
         android:layout_height="48dp"

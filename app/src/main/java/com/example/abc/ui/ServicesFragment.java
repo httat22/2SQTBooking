@@ -22,15 +22,6 @@ public class ServicesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_services, container, false);
 
-        Button btn = view.findViewById(R.id.btn);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         return view;
     }
 }

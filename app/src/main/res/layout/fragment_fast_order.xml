@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -25,12 +25,25 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textSize="20sp"
+                    android:text="@string/title_fast_order"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/primary_color"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:elevation="20dp"
+                    />
+
                 <ImageView
                     android:id="@+id/img_header"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/img_food" />
+                    android:src="@drawable/roomm" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -248,4 +261,4 @@
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</ScrollView>

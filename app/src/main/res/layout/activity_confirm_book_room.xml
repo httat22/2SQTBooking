@@ -259,7 +259,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/btn_confirmNow"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -675,7 +675,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView20" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btnBack"
             android:layout_width="56dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"

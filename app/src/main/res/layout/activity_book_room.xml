@@ -302,25 +302,16 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView22"
-                    android:layout_width="409dp"
-                    android:layout_height="273dp"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/roomm" />
-
-                <ImageView
                     android:id="@+id/imageView23"
                     android:layout_width="409dp"
                     android:layout_height="273dp"
                     android:layout_alignParentEnd="true"
                     android:contentDescription="imageslide"
+                    android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView22"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@drawable/roomm" />
 
@@ -878,7 +869,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView45" />
 
         <ImageButton
-            android:id="@+id/img_back"
+            android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"

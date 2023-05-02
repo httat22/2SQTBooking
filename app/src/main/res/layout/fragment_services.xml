@@ -6,9 +6,17 @@
     tools:context=".ui.ServicesFragment">
 
 
-    <Button
-        android:id="@+id/btn"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="40dp"
+        android:textSize="20sp"
+        android:text="@string/title_service"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/primary_color"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:elevation="20dp"
+        />
 
 </FrameLayout>

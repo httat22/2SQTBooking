@@ -691,7 +691,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView92">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_check_in"
+                android:onClick="pickCheckInDate_click"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.45"
@@ -713,7 +714,8 @@
                 app:srcCompat="@android:drawable/dialog_holo_dark_frame" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_check_out"
+                android:onClick="pickCheckOutDate_click"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.45"

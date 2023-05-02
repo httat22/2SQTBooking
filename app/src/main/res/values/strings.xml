@@ -19,11 +19,12 @@
     <string name="menu_user">User</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="change_password">Change Password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="sign_in">Đăng Nhập</string>
-    <string name="sign_up">Đăng Ký</string>
-    <string name="logout">Đăng Xuất</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Register</string>
+    <string name="logout">Log Out</string>
     <string name="date_format">--/--/----</string>
 
     <string name="address">125 Trần Phú, Văn Quán, Hà Đông, Hà Nội</string>
