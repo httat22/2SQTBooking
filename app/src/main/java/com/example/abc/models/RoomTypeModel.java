@@ -1,13 +1,12 @@
 package com.example.abc.models;
 
-public class RoomModel {
-    int id;
+import java.io.Serializable;
 
-
-
+public class RoomTypeModel implements Serializable {
+    int id, numberRoomAvailable;
     String description, price, imageURL;
 
-    public RoomModel() {
+    public RoomTypeModel() {
     }
 
     public int getId() {
@@ -41,10 +40,21 @@ public class RoomModel {
         this.imageURL = imageURL;
     }
 
-    public RoomModel(int id, String description, String imageURL, String price) {
+    public RoomTypeModel(int id, String description, String imageURL, String price) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.imageURL = imageURL;
+    }
+
+    @Override
+    public String toString() {
+        return "RoomTypeModel{" +
+                "id=" + id +
+                ", numberRoomAvailable=" + numberRoomAvailable +
+                ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
     }
 }

@@ -8,7 +8,7 @@
     android:fillViewport="true"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp"
-    tools:context=".activities.BookRoomActivity">
+    tools:context=".activities.BookRoomDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -302,7 +302,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView23"
+                    android:id="@+id/imageRoom"
                     android:layout_width="409dp"
                     android:layout_height="273dp"
                     android:layout_alignParentEnd="true"
@@ -315,78 +315,37 @@
                     app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@drawable/roomm" />
 
-                <ImageView
-                    android:id="@+id/imageView24"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView23"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/roomm" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView24"-->
+<!--                    android:layout_width="409dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:contentDescription="imageslide"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_bias="0.0"-->
+<!--                    app:srcCompat="@drawable/roomm" />-->
 
-                <ImageView
-                    android:id="@+id/imageView25"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView24"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/roomm" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView25"-->
+<!--                    android:layout_width="409dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:contentDescription="imageslide"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imageView24"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/roomm" />-->
 
-                <ImageView
-                    android:id="@+id/imageView26"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView25"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/roomm" />
-
-                <ImageView
-                    android:id="@+id/imageView27"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView26"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/roomm" />
-
-                <ImageView
-                    android:id="@+id/imageView28"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView27"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/roomm" />
-
-                <ImageView
-                    android:id="@+id/imageView30"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView28"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/roomm" />
-
-                <ImageView
-                    android:id="@+id/imageView31"
-                    android:layout_width="409dp"
-                    android:layout_height="match_parent"
-                    android:contentDescription="imageslide"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView30"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/roomm" />
+<!--                -->
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView27"-->
+<!--                    android:layout_width="409dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:contentDescription="imageslide"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/imageView26"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:srcCompat="@drawable/roomm" />-->
 
                 <!--                <ImageButton-->
                 <!--                    android:id="@+id/imageButton"-->
@@ -519,7 +478,6 @@
                 android:backgroundTint="@color/white"
                 android:textColor="@color/black"
                 android:outlineProvider="none"
-                android:onClick="pickCheckInDate_click"
                 android:text="@string/date_format"
                 android:padding="24dp"
                 android:textAllCaps="false"
@@ -541,7 +499,6 @@
                 android:layout_weight="4"
                 android:backgroundTint="@color/white"
                 android:textColor="@color/black"
-                android:onClick="pickCheckOutDate_click"
                 android:outlineProvider="none"
                 android:padding="24dp"
                 android:text="@string/date_format"

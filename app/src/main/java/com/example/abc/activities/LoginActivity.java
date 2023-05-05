@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
 
         initUI();
@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             if (user != null) {
                                 if (user.isEmailVerified()) {
                                     Toast.makeText(LoginActivity.this, "Sing in Success", Toast.LENGTH_SHORT).show();
@@ -103,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
                                 }
                             }
-
                         } else {
                             Toast.makeText(LoginActivity.this, "Sign in Failure", Toast.LENGTH_SHORT).show();
                         }

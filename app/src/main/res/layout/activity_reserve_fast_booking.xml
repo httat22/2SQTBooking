@@ -35,12 +35,13 @@
                 android:layout_margin="25dp"
                 android:fontFamily="@font/alata"
                 android:gravity="center"
-                android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                android:text="New service which helps you can book room faster."
                 android:textSize="18sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="30dp">
 
                 <TextView
                     android:id="@+id/textView91"
@@ -108,13 +109,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:background="#292929"
+                            android:backgroundTint="@color/white"
                             android:onClick="pickCheckInDate_click"
                             android:outlineProvider="none"
                             android:padding="15dp"
                             android:text="@string/date_format"
                             android:textAllCaps="false"
-                            android:textColor="@color/white"
+                            android:textColor="@color/black"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -147,13 +148,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_weight="4"
-                            android:background="#292929"
+                            android:backgroundTint="@color/white"
                             android:onClick="pickCheckOutDate_click"
                             android:outlineProvider="none"
                             android:padding="15dp"
                             android:text="@string/date_format"
                             android:textAllCaps="false"
-                            android:textColor="@color/white"
+                            android:textColor="@color/black"
                             android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -196,7 +197,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/baseline_keyboard_arrow_down_24"
                     app:layout_constraintEnd_toStartOf="@+id/button2"
-                    app:layout_constraintTop_toTopOf="@+id/button2" />
+                    app:layout_constraintTop_toTopOf="@+id/button2"
+                    android:backgroundTint="#fed1a7"/>
 
                 <Button
                     android:id="@+id/button2"
@@ -204,10 +206,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="24dp"
-                    android:background="@drawable/bg_btn"
+                    android:backgroundTint="#fed1a7 "
                     android:outlineProvider="none"
                     android:text="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -229,6 +231,7 @@
                     android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/btn_bg_design"
+                    android:backgroundTint="#fed1a7"
                     android:fontFamily="@font/alata"
                     android:text="Booking"
                     android:textSize="20sp"

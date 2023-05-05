@@ -181,7 +181,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageRoomConfirm"
             android:layout_width="180dp"
             android:layout_height="120dp"
             android:layout_marginStart="24dp"
@@ -206,7 +206,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageRoomConfirm"
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <TextView
@@ -220,7 +220,7 @@
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageRoomConfirm"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
         <TextView
@@ -248,7 +248,7 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toBottomOf="@+id/imageRoomConfirm" />
 
         <TextView
             android:id="@+id/textView18"
@@ -536,7 +536,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTest" />
 
         <View
             android:id="@+id/divider6"
@@ -664,7 +664,7 @@
             app:srcCompat="@drawable/dot" />
 
         <TextView
-            android:id="@+id/textView48"
+            android:id="@+id/tvTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.mystaging.MyStagingFragment">
+    android:layout_height="wrap_content"
+    tools:context=".fragment.MyStayingFragment">
 
     <TextView
+        android:id="@+id/textView48"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:elevation="20dp"
         android:gravity="center"
-        android:text="@string/title_staging"
+        android:text="@string/title_staying"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/primary_color"
@@ -20,4 +21,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recMyStaying"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView48" />
 </androidx.constraintlayout.widget.ConstraintLayout>

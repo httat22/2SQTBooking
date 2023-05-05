@@ -1,4 +1,4 @@
-package com.example.abc.ui.home;
+package com.example.abc.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import com.example.abc.R;
 import com.example.abc.activities.ReserveFastBookingActivity;
 import com.example.abc.activities.ReserveGolfActivity;
 import com.example.abc.activities.ReserveGymActivity;
-import com.example.abc.activities.ListRoomActivity;
+import com.example.abc.activities.RoomTypeListActivity;
 import com.example.abc.activities.ReserveTennisActivity;
 
 public class HomeFragment extends Fragment {
@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
         cvRoomReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ListRoomActivity.class);
+                Intent intent = new Intent(getContext(), RoomTypeListActivity.class);
                 startActivity(intent);
             }
         });

@@ -43,28 +43,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView48" />
 
-        <ImageButton
-            android:id="@+id/btnHome"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/circle_button"
-            android:contentDescription="home button"
-            android:padding="8dp"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/homebtn">
-
-        </ImageButton>
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -136,7 +114,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
@@ -691,13 +669,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.45"
-                android:background="@color/white"
+                android:backgroundTint="@color/white"
                 android:outlineProvider="none"
                 android:padding="24dp"
                 android:text="@string/date_format"
                 android:textAllCaps="false"
-                android:textColor="@color/header_color"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
 
             <ImageView
@@ -714,13 +692,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.45"
-                android:background="@color/white"
+                android:backgroundTint="@color/white"
                 android:outlineProvider="none"
                 android:padding="24dp"
                 android:text="@string/date_format"
                 android:textAllCaps="false"
-                android:textColor="@color/header_color"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -761,33 +739,32 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
-            android:background="@color/white"
+            android:backgroundTint="#fed1a7"
             android:outlineProvider="none"
             android:text="1"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/header_color"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView94"
             app:layout_constraintTop_toBottomOf="@+id/textView93" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnBookGolf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/confirm_button"
-            android:backgroundTint="#21bc78"
+            android:backgroundTint="#fed1a7"
             android:letterSpacing="0.1"
             android:padding="16dp"
             android:text="Booking Now"
             android:textAllCaps="false"
             android:textSize="18sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

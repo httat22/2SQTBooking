@@ -1,4 +1,4 @@
-package com.example.abc.ui;
+package com.example.abc.fragment;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -14,10 +14,11 @@ import android.widget.DatePicker;
 import com.example.abc.R;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class FastOrderFragment extends Fragment {
 
-    Button btnCheckIn, btnCheckOut;
+    Button btnCheckIn, btnCheckOut, btnBooking;
     View view;
 
     @Override
@@ -28,7 +29,20 @@ public class FastOrderFragment extends Fragment {
 
         btnCheckIn = view.findViewById(R.id.btn_checkIn);
         btnCheckOut = view.findViewById(R.id.btn_checkOut);
+        btnBooking = view.findViewById(R.id.btnBooking);
 
+        pickTimeDuration();
+
+        onClickBooking();
+
+        return view;
+    }
+
+    private void onClickBooking() {
+
+    }
+
+    private void pickTimeDuration() {
         btnCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +55,7 @@ public class FastOrderFragment extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                btnCheckIn.setText(String.format("%d/%d/%d", day, month, year));
+                                btnCheckIn.setText(String.format(Locale.getDefault(), "%d/%d/%d", day, month, year));
                             }
                         }, year, month, day);
                 datePickerDialog.show();
@@ -60,13 +74,11 @@ public class FastOrderFragment extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                btnCheckOut.setText(String.format("%d/%d/%d", day, month, year));
+                                btnCheckOut.setText(String.format(Locale.getDefault(), "%d/%d/%d", day, month, year));
                             }
                         }, year, month, day);
                 datePickerDialog.show();
             }
         });
-
-        return view;
     }
 }

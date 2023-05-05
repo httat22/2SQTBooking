@@ -36,6 +36,22 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
+        android:id="@+id/edt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone number"
+        android:maxLines="1"
+        android:inputType="text|phone"/>
+
+    <EditText
+        android:id="@+id/edt_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:maxLines="1"
+        android:inputType="text"/>
+
+    <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,12 +91,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạn đã có tài khoản?"/>
+            android:text="You have been an account?"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_height="wrap_content"
-            android:text="Đăng nhập"/>
+            android:text="Sign in"/>
 
     </LinearLayout>
 </LinearLayout>

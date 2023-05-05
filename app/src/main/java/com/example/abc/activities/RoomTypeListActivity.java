@@ -1,49 +1,62 @@
 package com.example.abc.activities;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.abc.R;
-import com.example.abc.adapters.RoomAdapter;
-import com.example.abc.models.RoomModel;
+import com.example.abc.adapters.RoomTypeAdapter;
+import com.example.abc.models.RoomTypeModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListRoomActivity extends AppCompatActivity {
+public class RoomTypeListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<RoomModel> roomModelList;
-    RoomAdapter roomAdapter;
+    List<RoomTypeModel> roomTypeModelList;
+    RoomTypeAdapter roomTypeAdapter;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Room");
+
+    ShimmerFrameLayout shimmerFrameLayout;
+
+    public RoomTypeListActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_room);
 
         recyclerView = findViewById(R.id.roomRec);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
-        roomModelList = new ArrayList<>();
-        roomAdapter = new RoomAdapter(this, roomModelList);
-        recyclerView.setAdapter(roomAdapter);
+        roomTypeModelList = new ArrayList<>();
+        roomTypeAdapter = new RoomTypeAdapter(this, roomTypeModelList);
+        recyclerView.setAdapter(roomTypeAdapter);
 
         getRoomModelListFromRealTimeDatabase();
 
     }
+
     private void getRoomModelListFromRealTimeDatabase() {
 //        Cach 1
 //        databaseReference.addValueEventListener(new ValueEventListener() {
@@ -67,43 +80,46 @@ public class ListRoomActivity extends AppCompatActivity {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                RoomModel roomModel = snapshot.getValue(RoomModel.class);
-                if (roomModel != null) {
-                    roomModelList.add(roomModel);
-                    roomAdapter.notifyDataSetChanged();
+                RoomTypeModel roomTypeModel = snapshot.getValue(RoomTypeModel.class);
+                if (roomTypeModel != null) {
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    roomTypeModelList.add(roomTypeModel);
+                    roomTypeAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                RoomModel roomModel = snapshot.getValue(RoomModel.class);
-                if (roomModel == null || roomModelList == null || roomModelList.isEmpty()) {
+                RoomTypeModel roomTypeModel = snapshot.getValue(RoomTypeModel.class);
+                if (roomTypeModel == null || roomTypeModelList == null || roomTypeModelList.isEmpty()) {
                     return;
                 }
 
-                for (int i = 0; i < roomModelList.size(); i++) {
-                    if (roomModel.getId() == roomModelList.get(i).getId()) {
-                        roomModelList.set(i, roomModel);
+                for (int i = 0; i < roomTypeModelList.size(); i++) {
+                    if (roomTypeModel.getId() == roomTypeModelList.get(i).getId()) {
+                        roomTypeModelList.set(i, roomTypeModel);
                         break;
                     }
                 }
-                roomAdapter.notifyDataSetChanged();
+                roomTypeAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                RoomModel roomModel = snapshot.getValue(RoomModel.class);
-                if (roomModel == null || roomModelList == null || roomModelList.isEmpty()) {
+                RoomTypeModel roomTypeModel = snapshot.getValue(RoomTypeModel.class);
+                if (roomTypeModel == null || roomTypeModelList == null || roomTypeModelList.isEmpty()) {
                     return;
                 }
 
-                for (int i = 0; i < roomModelList.size(); i++) {
-                    if (roomModel.getId() == roomModelList.get(i).getId()) {
-                        roomModelList.remove(roomModelList.get(i));
+                for (int i = 0; i < roomTypeModelList.size(); i++) {
+                    if (roomTypeModel.getId() == roomTypeModelList.get(i).getId()) {
+                        roomTypeModelList.remove(roomTypeModelList.get(i));
                         break;
                     }
                 }
-                roomAdapter.notifyDataSetChanged();
+                roomTypeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -116,5 +132,13 @@ public class ListRoomActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (roomTypeAdapter != null) {
+            roomTypeAdapter.release();
+        }
     }
 }

@@ -12,4 +12,7 @@
         <color name="header_color">#484848</color>
         <color name="text_color">#353535</color>
         <color name="primary_color">#fe6f89</color>
+        <color name="shimmer_color">#dddddd</color>
+        <color name="ticket_service_staying_color">#E5EFCB</color>
+        <color name="my_booking_staying_color">#F8D7D7</color>
 </resources>

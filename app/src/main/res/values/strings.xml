@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">2SQTBooking</string>
     <string name="title_home">Home</string>
-    <string name="title_staging">My Staging</string>
+    <string name="title_staying">My Staying</string>
     <string name="title_fast_order">Fast Order</string>
     <string name="title_user">Profile</string>
     <string name="title_service">Services</string>

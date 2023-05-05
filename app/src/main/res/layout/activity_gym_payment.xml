@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activities.GymPaymentActivity">
+    tools:context=".activities.PaymentGymActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -139,25 +139,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        tools:srcCompat="@drawable/leftarrow"
-        android:layout_width="56dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:contentDescription="back button"
-        android:padding="8dp"
-        android:paddingStart="8dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/leftarrow" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnBack"-->
+<!--        tools:srcCompat="@drawable/leftarrow"-->
+<!--        android:layout_width="56dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:contentDescription="back button"-->
+<!--        android:padding="8dp"-->
+<!--        android:paddingStart="8dp"-->
+<!--        android:paddingLeft="8dp"-->
+<!--        android:paddingTop="8dp"-->
+<!--        android:paddingRight="8dp"-->
+<!--        android:paddingBottom="8dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/leftarrow" />-->
 
     <TextView
         android:id="@+id/textView71"
@@ -171,10 +171,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView47" />
+        app:layout_constraintTop_toBottomOf="@+id/imgBackHome" />
 
     <ImageView
-        android:id="@+id/imageView47"
+        android:id="@+id/imgBackHome"
         tools:srcCompat="@drawable/logo2"
         android:layout_width="192dp"
         android:layout_height="78dp"

@@ -6,10 +6,10 @@
         android:icon="@drawable/home"
         android:title="@string/title_home" />
 
-    <item
-        android:id="@+id/navigation_services"
-        android:icon="@drawable/service"
-        android:title="@string/title_service" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_services"-->
+<!--        android:icon="@drawable/service"-->
+<!--        android:title="@string/title_service" />-->
 
     <item
         android:id="@+id/navigation_fast_order"
@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigation_my_staging"
         android:icon="@drawable/mystaying"
-        android:title="@string/title_staging" />
+        android:title="@string/title_staying" />
 
     <item
         android:id="@+id/navigation_user"

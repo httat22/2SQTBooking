@@ -1,4 +1,4 @@
-package com.example.abc.ui.user;
+package com.example.abc.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -28,22 +28,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class UserFragment extends Fragment {
 
     private FragmentUserBinding binding;
 
     private Button btnLogout, btnUpdate;
-    private ImageView userImage;
-    private TextView userName, userEmail;
+    private ImageView imvUserImage;
+    private EditText edtUserName, edtUserEmail, edtUserAddress, edtUserPhone;
     private Uri imageUri;
+    private DatabaseReference databaseReference;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentUserBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         initUI(root);
 
         showUserInformation();
@@ -75,8 +79,14 @@ public class UserFragment extends Fragment {
     private void onClickUpdateProfile() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
+
+        String uid = user.getUid();
+        databaseReference.child(uid).child("userName").setValue(edtUserName.getText().toString().trim());
+        databaseReference.child(uid).child("address").setValue(edtUserAddress.getText().toString().trim());
+        databaseReference.child(uid).child("phone").setValue(edtUserPhone.getText().toString().trim());
+
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(userName.getText().toString().trim())
+                .setDisplayName(edtUserName.getText().toString().trim())
                 .setPhotoUri(imageUri)
                 .build();
 
@@ -94,9 +104,12 @@ public class UserFragment extends Fragment {
     public void initUI(View view) {
         btnLogout = view.findViewById(R.id.btn_logout);
         btnUpdate = view.findViewById(R.id.btn_update);
-        userEmail = view.findViewById(R.id.userEmail);
-        userImage = view.findViewById(R.id.userImage);
-        userName = view.findViewById(R.id.userName);
+        imvUserImage = view.findViewById(R.id.userImage);
+
+        edtUserEmail = view.findViewById(R.id.edtUserEmail);
+        edtUserName = view.findViewById(R.id.edtUserName);
+        edtUserAddress = view.findViewById(R.id.edtUserAddress);
+        edtUserPhone = view.findViewById(R.id.edtUserPhone);
     }
 
     private void showUserInformation() {
@@ -104,19 +117,41 @@ public class UserFragment extends Fragment {
         if (user == null) {
             return;
         }
-        String name = user.getDisplayName();
+//        String name = user.getDisplayName();
         String email = user.getEmail();
         Uri photoUrl = user.getPhotoUrl();
+        String uid = user.getUid();
 
-        if (name == null) {
-            userName.setVisibility(View.GONE);
-        } else {
-            userName.setVisibility(View.VISIBLE);
-            userName.setText(name);
-        }
+        readUserInfo(uid);
 
-        userEmail.setText(email);
-        Glide.with(this).load(photoUrl).error(R.drawable.ic_baseline_person).into(userImage);
+//        if (name == null) {
+//            userName.setVisibility(View.GONE);
+//        } else {
+//            userName.setVisibility(View.VISIBLE);
+//            userName.setText(name);
+//        }
+
+        edtUserEmail.setText(email);
+        Glide.with(this).load(photoUrl).error(R.drawable.user_default).into(imvUserImage);
+    }
+
+    private void readUserInfo(String uid) {
+        databaseReference.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        DataSnapshot dataSnapshot = task.getResult();
+                        String name = String.valueOf(dataSnapshot.child("userName").getValue());
+                        String address = String.valueOf(dataSnapshot.child("address").getValue());
+                        String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+                        edtUserName.setText(name);
+                        edtUserAddress.setText(address);
+                        edtUserPhone.setText(phone);
+                    }
+                }
+            }
+        });
     }
 
     public void selectImageFromGallery() {
@@ -128,7 +163,7 @@ public class UserFragment extends Fragment {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             imageUri = data.getData();
-                            userImage.setImageURI(imageUri);
+                            imvUserImage.setImageURI(imageUri);
                         } else {
                             Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
                         }
@@ -136,7 +171,7 @@ public class UserFragment extends Fragment {
                 }
         );
 
-        userImage.setOnClickListener(new View.OnClickListener() {
+        imvUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPicker = new Intent();

@@ -35,12 +35,16 @@
         </activity>
         <activity
             android:name=".activities.RegistrationActivity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
-            android:name=".activities.GymPaymentActivity"
+            android:name=".activities.PaymentGymActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ReserveGymActivity"
@@ -52,10 +56,10 @@
             android:name=".activities.PaymentRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.BookRoomActivity"
+            android:name=".activities.BookRoomDetailActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".activities.ListRoomActivity"
+            android:name=".activities.RoomTypeListActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
