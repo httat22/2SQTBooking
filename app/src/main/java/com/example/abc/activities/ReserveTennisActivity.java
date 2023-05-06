@@ -70,6 +70,11 @@ public class ReserveTennisActivity extends AppCompatActivity {
                 }
                 getBookServiceModel();
                 onClickAddRealtimeDatabase();
+                Intent intent = new Intent(ReserveTennisActivity.this, PaymentTennisActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("object_bookServiceModel", bookServiceModel);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
@@ -85,11 +90,11 @@ public class ReserveTennisActivity extends AppCompatActivity {
         userId = user.getUid();
         nameType = "Tennis ticket";
         time = bookServiceModel.getDateArrive() + " - " + bookServiceModel.getDateLeave();
-        imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/tennis%2Fhomepagetennis1.jpg?alt=media&token=2c223e81-3adb-4c9e-828f-c773158d0326";
+        imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/tennis%2Ftennis2.jpg?alt=media&token=ea267312-95f2-46c6-98d3-fcf3fdd11c22";
         ticketId = "Tennis" + System.currentTimeMillis();
         price = bookServiceModel.getPrice();
         numberPerson = 2;
-        description = "One Day Tennis";
+        description = "";
         TicketModel ticketModel = new TicketModel(userId, nameType, time, imageURL, price, numberPerson, ticketId, description, "reserved");
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -41,6 +42,9 @@ public class UserFragment extends Fragment {
     private EditText edtUserName, edtUserEmail, edtUserAddress, edtUserPhone;
     private Uri imageUri;
     private DatabaseReference databaseReference;
+
+    ProgressBar progressBar;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -89,12 +93,13 @@ public class UserFragment extends Fragment {
                 .setDisplayName(edtUserName.getText().toString().trim())
                 .setPhotoUri(imageUri)
                 .build();
-
+        progressBar.setVisibility(View.VISIBLE);
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Update profile success", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -110,6 +115,7 @@ public class UserFragment extends Fragment {
         edtUserName = view.findViewById(R.id.edtUserName);
         edtUserAddress = view.findViewById(R.id.edtUserAddress);
         edtUserPhone = view.findViewById(R.id.edtUserPhone);
+        progressBar = view.findViewById(R.id.progressBar);
     }
 
     private void showUserInformation() {

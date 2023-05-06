@@ -89,11 +89,11 @@ public class ReserveGymActivity extends AppCompatActivity {
         userId = user.getUid();
         nameType = "Gym Ticket";
         time = bookServiceModel.getDateArrive() + " - " + bookServiceModel.getDateLeave();
-        imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/gyms%2Fgym2.jpg?alt=media&token=10189ee9-b01a-4426-9f08-c4593cdc25e0";
+        imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/gyms%2Ffitness1.jpg?alt=media&token=f98e89dc-01d8-4eb1-8692-51be805c2604";
         ticketId = "Gym" + System.currentTimeMillis();
         price = bookServiceModel.getPrice();
         numberPerson = 2;
-        description = "One Day Gym";
+        description = "";
         TicketModel ticketModel = new TicketModel(userId, nameType, time, imageURL, price, numberPerson, ticketId, description, "reserved");
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override

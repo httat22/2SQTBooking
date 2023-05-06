@@ -226,6 +226,7 @@
                     app:layout_constraintTop_toTopOf="@+id/button2" />
 
                 <Button
+                    android:id="@+id/btnBookNow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="40dp"

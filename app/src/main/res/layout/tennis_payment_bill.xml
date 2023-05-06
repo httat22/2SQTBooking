@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activities.PaymentGymActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView85"
@@ -140,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
 <!--    <ImageButton-->
-<!--        android:id="@+id/btnBack"-->
+<!--        android:id="@+id/imageButton3"-->
 <!--        tools:srcCompat="@drawable/leftarrow"-->
 <!--        android:layout_width="56dp"-->
 <!--        android:layout_height="48dp"-->
@@ -171,10 +163,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgBackHome" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView47" />
 
     <ImageView
-        android:id="@+id/imgBackHome"
+        android:id="@+id/imageView47"
         tools:srcCompat="@drawable/logo2"
         android:layout_width="192dp"
         android:layout_height="78dp"
@@ -193,13 +185,15 @@
         android:layout_marginEnd="24dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/fitness1"
+        android:src="@drawable/tennis2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider11"
         app:shapeAppearanceOverlay="@style/roundimageview"
-        app:srcCompat="@drawable/fitness1">
+        app:srcCompat="@drawable/tennis2"
+        tools:srcCompat="@drawable/tennis2">
+
     </com.google.android.material.imageview.ShapeableImageView>
 
     <TextView
@@ -209,7 +203,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="Gym and Fitness Club Ticket"
+        android:text="Tennis Courts Club Ticket"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/header_color"
@@ -225,7 +219,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
-        android:text="$ 25 / day"
+        android:text="$ 40 / day"
         android:textColor="@color/header_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -297,7 +291,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="$ 25 x 1 day x 1 people"
+        android:text="$ 40 x 1 day x 1 people"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -311,7 +305,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="$ 25"
+        android:text="$ 40"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -325,12 +319,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="$ 25"
+        android:text="$ 40"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView81" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_services" />
     <fragment
         android:id="@+id/navigation_fast_order"
-        android:name="com.example.abc.fragment.FastOrderFragment"
+        android:name="com.example.abc.fragment.FastBookingFragment"
         android:label="FastOrder"
         tools:layout="@layout/fragment_fast_order" />
 </navigation>
