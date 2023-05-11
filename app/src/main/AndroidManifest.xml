@@ -13,8 +13,24 @@
         android:theme="@style/Theme.Abc"
         tools:targetApi="31">
         <activity
+            android:name=".activities.DatePickerActivity"
+            android:exported="false" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
             android:name=".activities.PaymentGolfActivity"
-            android:exported="false" />
+            android:exported="true" >
+                         <intent-filter>
+                         <action android:name="android.intent.action.MAIN" />
+
+
+                         <category android:name="android.intent.category.LAUNCHER" />
+                         </intent-filter>
+        </activity>
         <activity
             android:name=".activities.PaymentTennisActivity"
             android:exported="false" />
@@ -23,21 +39,38 @@
             android:exported="false" />
         <activity
             android:name=".activities.ReserveFastBookingActivity"
-            android:exported="false" />
+            android:exported="false" >
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
+
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
+        </activity>
         <activity
             android:name=".activities.ReserveTennisActivity"
-            android:exported="false" />
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".activities.ReserveGolfActivity"
-            android:exported="false" />
+            android:exported="false" >
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity
             android:name=".activities.RegistrationActivity"
@@ -59,27 +92,26 @@
             android:exported="false" />
         <activity
             android:name=".activities.BookRoomDetailActivity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".activities.RoomTypeListActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.WelcomeActivity"
-            android:exported="true">
+            android:exported="false">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
 
         <meta-data

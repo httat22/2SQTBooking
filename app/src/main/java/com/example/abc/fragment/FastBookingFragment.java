@@ -22,7 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class FastBookingFragment extends Fragment {
@@ -91,15 +96,34 @@ public class FastBookingFragment extends Fragment {
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                btnCheckIn.setText(String.format(Locale.getDefault(), "%d/%d/%d", day, month, year));
-                                dateArrive = String.format(Locale.getDefault(), "%d/%d/%d", day, month, year);
-                            }
-                        }, year, month, day);
-                datePickerDialog.show();
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        dateArrive = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+                        btnCheckIn.setText(dateArrive);
+                    }
+                }, year, month, day);
+                dpd.show(getChildFragmentManager(), "DatePickerDialog");
+                dpd.setMinDate(calendar);
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//                String[] holidays = {"8/5/2023", "20/5/2023"};
+//                Date date = null;
+//                for (String holiday : holidays) {
+//
+//                    try {
+//                        date = sdf.parse(holiday);
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    calendar = dateToCalendar(date);
+//                    System.out.println(calendar.getTime());
+//
+//                    List<Calendar> dates = new ArrayList<>();
+//                    dates.add(calendar);
+//                    Calendar[] disabledDays1 = dates.toArray(new Calendar[dates.size()]);
+//                    dpd.setDisabledDays(disabledDays1);
+//                }
             }
         });
 
@@ -111,16 +135,41 @@ public class FastBookingFragment extends Fragment {
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                btnCheckOut.setText(String.format(Locale.getDefault(), "%d/%d/%d", day, month, year));
-                                dateLeave = String.format(Locale.getDefault(), "%d/%d/%d", day, month, year);
-                            }
-                        }, year, month, day);
-                datePickerDialog.show();
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        dateLeave = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+                        btnCheckOut.setText(dateLeave);
+                    }
+                }, year, month, day);
+                dpd.show(getChildFragmentManager(), "DatePickerDialog");
+                dpd.setMinDate(calendar);
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//                String[] holidays = {"8/5/2023", "20/5/2023"};
+//                Date date = null;
+//                for (String holiday : holidays) {
+//
+//                    try {
+//                        date = sdf.parse(holiday);
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    calendar = dateToCalendar(date);
+//                    System.out.println(calendar.getTime());
+//
+//                    List<Calendar> dates = new ArrayList<>();
+//                    dates.add(calendar);
+//                    Calendar[] disabledDays1 = dates.toArray(new Calendar[dates.size()]);
+//                    dpd.setDisabledDays(disabledDays1);
+//                }
             }
         });
+    }
+    @NonNull
+    private Calendar dateToCalendar(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
     }
 }

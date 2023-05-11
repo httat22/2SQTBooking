@@ -197,7 +197,7 @@
     </com.google.android.material.imageview.ShapeableImageView>
 
     <TextView
-        android:id="@+id/textView72"
+        android:id="@+id/tvNameTicket"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -225,7 +225,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imagegym"
-        app:layout_constraintTop_toBottomOf="@+id/textView72" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameTicket" />
 
     <View
         android:id="@+id/divider12"

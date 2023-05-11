@@ -32,7 +32,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_room, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_room, parent, false));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
         String price = roomTypeModel.getPrice() + "$/night";
 
         Glide.with(context).load(roomTypeModel.getImageURL()).into(holder.imageView);
-        holder.tvTypeRoom.setText(roomTypeModel.getDescription());
+        holder.tvTypeRoom.setText(roomTypeModel.getRoom());
         holder.tvPrice.setText(price);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
     private void onCLickGoToDetail(RoomTypeModel roomTypeModel) {
         Intent intent = new Intent(context, BookRoomDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("object_roomModel", roomTypeModel);
+        bundle.putSerializable("object_roomTypeModel", roomTypeModel);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

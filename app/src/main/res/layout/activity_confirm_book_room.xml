@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/dot" />
 
         <TextView
-            android:id="@+id/textView42"
+            android:id="@+id/tvPriceMul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -52,10 +52,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView42" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceMul" />
 
         <TextView
-            android:id="@+id/textView44"
+            android:id="@+id/tvPriceResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
         <TextView
-            android:id="@+id/textView45"
+            android:id="@+id/tvPriceTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -79,7 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView42" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceMul" />
 
         <TextView
             android:id="@+id/textView40"
@@ -122,10 +122,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRangeDate" />
 
         <TextView
-            android:id="@+id/textView38"
+            android:id="@+id/tvRangeDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -195,7 +195,7 @@
             tools:srcCompat="@drawable/roomm" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/tvNameRoom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -210,7 +210,7 @@
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/tvPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -221,7 +221,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageRoomConfirm"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/tvNameRoom" />
 
         <TextView
             android:id="@+id/textView22"

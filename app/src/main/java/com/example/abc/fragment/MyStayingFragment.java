@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.abc.R;
 import com.example.abc.adapters.TicketAdapter;
 import com.example.abc.models.TicketModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,8 @@ public class MyStayingFragment extends Fragment {
     private RecyclerView recMyStaying;
     private List<TicketModel> list;
     private TicketAdapter ticketAdapter;
+
+    ShimmerFrameLayout shimmerFrameLayout;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_staying");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +39,8 @@ public class MyStayingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_staying, container, false);
 
         recMyStaying = view.findViewById(R.id.recMyStaying);
+        shimmerFrameLayout = view.findViewById(R.id.shimmerMyStaying);
+        shimmerFrameLayout.startShimmer();
         recMyStaying.setHasFixedSize(true);
         recMyStaying.setLayoutManager(new LinearLayoutManager(getContext()));
         
@@ -56,6 +61,9 @@ public class MyStayingFragment extends Fragment {
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                recMyStaying.setVisibility(View.VISIBLE);
                 if (list != null) {
                     list.clear();
                 }

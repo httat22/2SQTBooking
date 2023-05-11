@@ -43,6 +43,7 @@ public class RoomTypeListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.roomRec);
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -98,7 +99,7 @@ public class RoomTypeListActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < roomTypeModelList.size(); i++) {
-                    if (roomTypeModel.getId() == roomTypeModelList.get(i).getId()) {
+                    if (roomTypeModel.getRoomId() == roomTypeModelList.get(i).getRoomId()) {
                         roomTypeModelList.set(i, roomTypeModel);
                         break;
                     }
@@ -114,7 +115,7 @@ public class RoomTypeListActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < roomTypeModelList.size(); i++) {
-                    if (roomTypeModel.getId() == roomTypeModelList.get(i).getId()) {
+                    if (roomTypeModel.getRoomId() == roomTypeModelList.get(i).getRoomId()) {
                         roomTypeModelList.remove(roomTypeModelList.get(i));
                         break;
                     }

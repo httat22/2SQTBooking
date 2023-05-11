@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class BookRoomModel implements Serializable {
     int totalPayment;
-    int price, roomId;
-    String userId;
+    int price;
+    String userId, roomId;
     String dateArrive, dateLeave;
 
     public int getTotalPayment() {
@@ -36,11 +36,11 @@ public class BookRoomModel implements Serializable {
         this.userId = userId;
     }
 
-    public int getRoomId() {
+    public String getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
 
@@ -60,7 +60,7 @@ public class BookRoomModel implements Serializable {
         this.dateLeave = dateLeave;
     }
 
-    public BookRoomModel(int totalPayment, int price, String userId, int roomId, String dateArrive, String dateLeave) {
+    public BookRoomModel(int totalPayment, int price, String userId, String roomId, String dateArrive, String dateLeave) {
         this.totalPayment = totalPayment;
         this.price = price;
         this.userId = userId;
@@ -81,7 +81,7 @@ public class BookRoomModel implements Serializable {
                 '}';
     }
 
-    public BookRoomModel(int price, String userId, int roomId, String dateArrive, String dateLeave) {
+    public BookRoomModel(int price, String userId, String roomId, String dateArrive, String dateLeave) {
         this.price = price;
         this.userId = userId;
         this.roomId = roomId;

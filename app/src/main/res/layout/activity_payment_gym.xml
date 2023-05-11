@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceMul" />
 
     <TextView
         android:id="@+id/textView80"
@@ -87,7 +87,7 @@
         app:srcCompat="@drawable/group" />
 
     <TextView
-        android:id="@+id/textView77"
+        android:id="@+id/tvRangeDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -203,7 +203,7 @@
     </com.google.android.material.imageview.ShapeableImageView>
 
     <TextView
-        android:id="@+id/textView72"
+        android:id="@+id/tvNameTicket"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -219,7 +219,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider11" />
 
     <TextView
-        android:id="@+id/textView73"
+        android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -231,7 +231,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imagegym"
-        app:layout_constraintTop_toBottomOf="@+id/textView72" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameTicket" />
 
     <View
         android:id="@+id/divider12"
@@ -291,7 +291,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView49" />
 
     <TextView
-        android:id="@+id/textView81"
+        android:id="@+id/tvPriceMul"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginStart="24dp"
@@ -305,7 +305,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView80" />
 
     <TextView
-        android:id="@+id/textView82"
+        android:id="@+id/tvPriceResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -319,7 +319,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView80" />
 
     <TextView
-        android:id="@+id/textView84"
+        android:id="@+id/tvPriceTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -331,6 +331,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceMul" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
