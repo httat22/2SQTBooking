@@ -24,14 +24,14 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:textColor="@color/black"
-                android:hint="Enter name"/>
+                android:hint="@string/enter_name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvNameError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter name"
+            android:text="@string/please_enter_name"
             android:textColor="@color/red_color"
             android:visibility="gone"
             />
@@ -44,16 +44,16 @@
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:hint="Enter email"/>
+                android:hint="@string/enter_email"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvEmailError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter email"
+            android:text="@string/please_enter_email"
             android:textColor="@color/red_color"
             android:visibility="gone"
             />
@@ -66,16 +66,16 @@
                 android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="phone"
                 android:textColor="@color/black"
-                android:hint="Enter phone"/>
+                android:hint="@string/enter_phone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvPhoneError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter phone"
+            android:text="@string/please_enter_phone"
             android:visibility="gone"
             android:textColor="@color/red_color"
             />
@@ -90,13 +90,13 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:textColor="@color/black"
-                android:hint="Enter Address"/>
+                android:hint="@string/enter_address"/>
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/tvAddressError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter address"
+            android:text="@string/please_enter_address"
             android:textColor="@color/red_color"
             android:visibility="gone"
             />
@@ -112,14 +112,14 @@
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:hint="Enter password"/>
+                android:hint="@string/enter_password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvPasswordError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter password"
+            android:text="@string/please_enter_password"
             android:textColor="@color/red_color"
             android:visibility="gone"
             />
@@ -135,14 +135,14 @@
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:hint="Enter confirm password"/>
+                android:hint="@string/enter_confirm_password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvConfirmError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter confirm password"
+            android:text="@string/please_enter_confirm_password"
             android:visibility="gone"
             android:textColor="@color/red_color"
             />
@@ -150,7 +150,7 @@
             android:id="@+id/tvConfirmEqualError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm password is not equal password"
+            android:text="@string/confirm_password_is_not_equal_password"
             android:visibility="gone"
             android:textColor="@color/red_color"
             />
@@ -159,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Password should be"
+            android:text="@string/password_should_be"
             android:textSize="16sp"
             android:textColor="@color/black"/>
         
@@ -185,7 +185,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="At least 9 characters"
+                android:text="@string/at_least_9_characters"
                 android:textColor="@color/black"
                 android:gravity="center|start"
                 android:layout_marginStart="10dp"
@@ -214,7 +214,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Minimum one uppercase"
+                android:text="@string/minimum_one_uppercase"
                 android:textColor="@color/black"
                 android:gravity="center|start"
                 android:layout_marginStart="10dp"
@@ -243,7 +243,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Minimum one number"
+                android:text="@string/minimum_one_number"
                 android:textColor="@color/black"
                 android:gravity="center|start"
                 android:layout_marginStart="10dp"
@@ -272,7 +272,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Minimum one symbol"
+                android:text="@string/minimum_one_symbol"
                 android:textColor="@color/black"
                 android:gravity="center|start"
                 android:layout_marginStart="10dp"
@@ -288,7 +288,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -313,12 +313,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You have been an account? "/>
+                android:text="@string/you_have_been_an_account"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red_color"
-                android:text="Sign in"/>
+                android:text="@string/sign_in"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -33,23 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/imageButton5"-->
-        <!--            android:layout_width="48dp"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:layout_marginStart="24dp"-->
-        <!--            android:layout_marginTop="8dp"-->
-        <!--            android:layout_marginEnd="24dp"-->
-        <!--            android:background="@color/white"-->
-        <!--            android:contentDescription="avatar "-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="1.0"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:srcCompat="@drawable/avatar" />-->
-
-
-
         <TextView
             android:id="@+id/textView90"
             android:layout_width="wrap_content"
@@ -57,7 +40,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="260dp"
             android:layout_marginEnd="24dp"
-            android:text="Let's start"
+            android:text="@string/let_s_start"
             android:textColor="@color/white"
             android:textSize="44sp"
             android:textStyle="bold"
@@ -73,7 +56,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:letterSpacing="0.05"
-            android:text="and explore"
+            android:text="@string/and_explore"
             android:textColor="@color/white"
             android:textSize="44sp"
             android:textStyle="bold"
@@ -89,7 +72,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:letterSpacing="0.1"
-            android:text="our services !"
+            android:text="@string/our_services_intro"
             android:textColor="@color/white"
             android:textSize="44sp"
             android:textStyle="bold"
@@ -123,7 +106,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="12dp"
-                    android:text="Our Services"
+                    android:text="@string/our_services"
                     android:textColor="#fe6f89"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -168,7 +151,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Fast Booking"
+                                android:text="@string/fast_booking"
                                 android:textColor="#fe6f89"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -203,7 +186,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Reservation"
+                                android:text="@string/reservation"
                                 android:textColor="#fe6f89"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -252,7 +235,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Gymnastics"
+                                android:text="@string/gymnastics"
                                 android:textColor="#fe6f89"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -286,7 +269,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Tennis"
+                                android:text="@string/tennis"
                                 android:textColor="#fe6f89"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -320,7 +303,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Golf"
+                                android:text="@string/golf"
                                 android:textColor="#fe6f89"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -342,7 +325,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Our Hotel"
+            android:text="@string/our_hotel"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -358,7 +341,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:justificationMode="inter_word"
-            android:text="Welcome to our luxurious hotel complex, offering a range of stunning accommodations to suit every taste. Enjoy breathtaking views of the ocean, city, or gardens from your private balcony or terrace. Our exceptional amenities, including multiple swimming pools, gymnastics center and sport services, ensure a truly indulgent stay. Discover the ultimate in comfort and style at our hotel complex, where every detail is designed to exceed your expectations."
+            android:text="@string/our_hotel_description"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -371,7 +354,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:text="The great healing and relax place"
+            android:text="@string/the_great_healing_and_relax_place"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -491,7 +474,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:text="Gymnastics and Fitness Center"
+            android:text="@string/gymnastics_and_fitness_center"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -658,7 +641,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:text="Tennis and Golf"
+            android:text="@string/tennis_and_golf"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -786,7 +769,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Proposed rooms"
+            android:text="@string/proposed_rooms"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -916,7 +899,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Recently viewed rooms"
+            android:text="@string/recently_viewed_rooms"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

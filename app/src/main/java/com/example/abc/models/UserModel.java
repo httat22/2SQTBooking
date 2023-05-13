@@ -1,19 +1,33 @@
 package com.example.abc.models;
 
 public class UserModel {
-    String userId, userName, email, phone, address;
+    String userId, userName, email, phone, address, salt;
 
     public UserModel() {}
 
     public String getUserId() {
         return userId;
     }
-    public UserModel(String userId, String userName, String email, String phone, String address) {
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public UserModel(String userId, String userName, String email, String phone, String address, String salt) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.salt = salt;
     }
 
     public String getUserName() {

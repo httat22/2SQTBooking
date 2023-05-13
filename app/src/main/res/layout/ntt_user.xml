@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".fragment.UserFragment">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +30,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvUserInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -43,7 +40,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -54,30 +50,30 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvDeleteAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/ntt_input_text"
+                android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
                 android:padding="20dp"
                 android:text="Delete account permanently"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/ntt_input_text"
+                android:drawableRight="@drawable/baseline_keyboard_arrow_right_24"
                 android:padding="20dp"
-                android:text="Log Out"
+                android:text="Log in"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="60dp"
                 android:gravity="bottom|center"
                 android:text="Hotline: 0999999999 - 123456789" />
         </LinearLayout>

@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email has been sent! "
+            android:text="@string/email_has_been_sent"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:gravity="center"
@@ -26,13 +26,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please check your inbox and click"
+            android:text="@string/please_check_your_inbox_and_click"
             android:textSize="16sp"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="in the received link to reset a password"
+            android:text="@string/in_the_received_link_to_reset_a_password"
             android:textSize="16sp"
             android:gravity="center"/>
 
@@ -69,12 +69,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Didn't receive the link? "/>
+            android:text="@string/didn_t_receive_the_link"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_button"
-            android:text="Resend"/>
+            android:text="@string/resent"/>
     </LinearLayout>
 
         <LinearLayout
@@ -88,12 +88,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remember password? "/>
+                android:text="@string/remember_password"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_button"
-                android:text="Sign in"/>
+                android:text="@string/sign_in"/>
 
         </LinearLayout>
     </LinearLayout>

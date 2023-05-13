@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +31,8 @@ public class MyStayingFragment extends Fragment {
     private RecyclerView recMyStaying;
     private List<TicketModel> list;
     private TicketAdapter ticketAdapter;
+    private ImageView imgEmptyCart;
+    private TextView tvEmpty;
 
     ShimmerFrameLayout shimmerFrameLayout;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_staying");
@@ -38,6 +42,9 @@ public class MyStayingFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_my_staying, container, false);
 
+
+        imgEmptyCart = view.findViewById(R.id.imgEmptyCart);
+        tvEmpty = view.findViewById(R.id.tvEmpty);
         recMyStaying = view.findViewById(R.id.recMyStaying);
         shimmerFrameLayout = view.findViewById(R.id.shimmerMyStaying);
         shimmerFrameLayout.startShimmer();
@@ -70,6 +77,13 @@ public class MyStayingFragment extends Fragment {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     TicketModel ticketModel = (TicketModel) dataSnapshot.getValue(TicketModel.class);
                     list.add(ticketModel);
+                }
+                if (list.size() == 0) {
+                    imgEmptyCart.setVisibility(View.VISIBLE);
+                    tvEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    imgEmptyCart.setVisibility(View.GONE);
+                    tvEmpty.setVisibility(View.GONE);
                 }
                 ticketAdapter.notifyDataSetChanged();
             }

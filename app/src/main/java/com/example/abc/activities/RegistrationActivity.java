@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -29,13 +27,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -78,16 +76,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
         name = edtName.getText().toString().trim();
         email = edtEmail.getText().toString().trim();
-        password = edtPassword.getText().toString().trim();
-        confirmPassword = edtConfirmPassword.getText().toString().trim();
         phone = edtPhone.getText().toString().trim();
         address = edtAddress.getText().toString().trim();
+
+        password = edtPassword.getText().toString().trim();
+        confirmPassword = edtConfirmPassword.getText().toString().trim();
+        String salt = generateSalt();
+        String saltedPassword = password + salt;
+        String hashedPassword = hash(saltedPassword) + salt;
+
 
         if (name.length() > 0 && email.length() > 0 && password.length() > 0 && confirmPassword.length() > 0 &&
                 phone.length() > 0 && address.length() > 0 && password.equals(confirmPassword)) {
             if (isRegistrationClickable) {
                 progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(email, password)
+                mAuth.createUserWithEmailAndPassword(email, hashedPassword)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -99,23 +102,26 @@ public class RegistrationActivity extends AppCompatActivity {
                                         //Lưu thông tin người dùng trên realtime database
                                         usersReference = FirebaseDatabase.getInstance().getReference("users");
                                         String userId = user.getUid();
-                                        UserModel userModel = new UserModel(userId, name, email, phone, address);
+                                        UserModel userModel = new UserModel(userId, name, email, phone, address, salt);
                                         usersReference.child(userId).setValue(userModel);
                                         user.sendEmailVerification()
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        Toast.makeText(RegistrationActivity.this, "Verification Email has been sent", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegistrationActivity.this, "Verification Email has been sent!", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(RegistrationActivity.this, SentEmailActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
                                                     }
                                                 }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(RegistrationActivity.this, "on Failure: Email not sent", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegistrationActivity.this, "on Failure: Email not sent!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                     }
                                 } else {
-                                    Toast.makeText(RegistrationActivity.this, "Register Failure", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegistrationActivity.this, "Sign up failed!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -349,5 +355,23 @@ public class RegistrationActivity extends AppCompatActivity {
         cardTwo = findViewById(R.id.cardTwo);
         cardThree = findViewById(R.id.cardThree);
         cardFour = findViewById(R.id.cardFour);
+    }
+
+    private String generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        return new String(salt);
+    }
+
+    private String hash(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            return new String(digest);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
