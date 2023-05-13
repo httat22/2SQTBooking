@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    android:text="Guests"
+                    android:text="Room Type"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -183,7 +183,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="24dp"
-                    android:text="Number:"
+                    android:text="Choose:"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -191,57 +191,62 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView93" />
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/baseline_keyboard_arrow_down_24"
-                    app:layout_constraintEnd_toStartOf="@+id/button2"
-                    app:layout_constraintTop_toTopOf="@+id/button2"
-                    android:backgroundTint="#fed1a7"/>
-
-                <Button
-                    android:id="@+id/button2"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnSingleRoom"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="#fed1a7 "
-                    android:outlineProvider="none"
-                    android:text="1"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.606"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/colorDefault"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintStart_toEndOf="@+id/textView94"
-                    app:layout_constraintTop_toBottomOf="@+id/textView93" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView93" >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Single Room"
+                        android:paddingHorizontal="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/baseline_keyboard_arrow_up_24"
-                    android:text=" "
-                    app:layout_constraintStart_toEndOf="@+id/button2"
-                    app:layout_constraintTop_toTopOf="@+id/button2" />
-
-                <Button
-                    android:id="@+id/btnBookNow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/btn_bg_design"
-                    android:backgroundTint="#fed1a7"
-                    android:fontFamily="@font/alata"
-                    android:text="Booking"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnDoubleRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:cardBackgroundColor="@color/colorDefault"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toEndOf="@+id/btnSingleRoom"
+                    app:layout_constraintTop_toTopOf="@+id/btnSingleRoom" >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Double Room"
+                        android:gravity="center"
+                        android:paddingHorizontal="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnBooking"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="40dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView94"
-                    app:layout_constraintVertical_bias="0.647" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView94">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Booking"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

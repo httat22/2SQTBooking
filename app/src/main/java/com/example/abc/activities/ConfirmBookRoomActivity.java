@@ -38,7 +38,7 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
     private RoomTypeModel roomTypeModel;
     private BookRoomModel bookRoomModel;
     private ImageView imageView;
-    private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal;
+    private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson;
     private DatabaseReference databaseReference;
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
 
@@ -58,6 +58,7 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         tvPriceMul = findViewById(R.id.tvPriceMul);
         tvPriceResult = findViewById(R.id.tvPriceResult);
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
+        tvNumberPerson = findViewById(R.id.tvNumberPerson);
 
         getDataFromBookRoomDetail();
 
@@ -133,9 +134,10 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
             calendar.add(Calendar.DATE, 1);
         }
         list.add(sdf.format(endDate));
+        String pathParent = String.valueOf(roomTypeModel.getRoomType());
         String path = String.valueOf(roomTypeModel.getRoomId());
         for (String s : list) {
-            timeRef.child(path).push().setValue(s);
+            timeRef.child(pathParent).child(path).push().setValue(s);
         }
     }
 
@@ -146,6 +148,9 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         bookRoomModel = (BookRoomModel) bundle.get("object_bookRoomModel");
         Glide.with(this).load(roomTypeModel.getImageURL()).into(imageView);
         tvNameRoom.setText(roomTypeModel.getRoom());
+
+        String numberSingle = "2 Adults";
+        String numberDouble = "4 Adults";
 
         String stringPrice = "$" + roomTypeModel.getPrice() + "/night";
         String stringTime = bookRoomModel.getDateArrive() + " - " + bookRoomModel.getDateLeave();
@@ -159,6 +164,11 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         tvPriceMul.setText(stringPriceMul);
         tvPriceResult.setText(stringPriceResult);
         tvPriceTotal.setText(stringPriceResult);
+        if (roomTypeModel.getRoomType().equals("single")) {
+            tvNumberPerson.setText(numberSingle);
+        } else {
+            tvNumberPerson.setText(numberDouble);
+        }
     }
 
     public int getNumberOfDate(String start, String end) {

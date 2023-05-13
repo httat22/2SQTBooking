@@ -404,7 +404,7 @@
             app:srcCompat="@drawable/group" />
 
         <TextView
-            android:id="@+id/textView34"
+            android:id="@+id/tvNumberPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

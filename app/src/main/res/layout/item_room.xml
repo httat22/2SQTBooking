@@ -79,6 +79,7 @@
                 android:gravity="start"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tối đa 2 người lớn, 2 bé (0-5 tuổi) ở miễn phí"

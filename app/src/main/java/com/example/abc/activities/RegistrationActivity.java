@@ -1,18 +1,24 @@
 package com.example.abc.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.abc.R;
 import com.example.abc.models.UserModel;
@@ -33,10 +39,12 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    EditText edtEmail, edtName, edtPassword, edtConfirmPassword, edtPhone, edtAddress;
-    Button btnRegistration;
+    private EditText edtEmail, edtName, edtPassword, edtConfirmPassword, edtPhone, edtAddress;
+    private TextView tvNameError, tvEmailError, tvPhoneError, tvAddressError, tvPasswordError, tvConfirmError, tvConfirmEqualError;
+    private CardView cardOne, cardTwo, cardThree, cardFour, btnRegister;
+    private boolean isAtLeast9 = false, hasUpperCase = false, hasNumber = false, hasSymbol = false, isRegistrationClickable = false;
     ProgressBar progressBar;
-    LinearLayout linearLayoutSignIn;
+    LinearLayout llSignIn;
     FirebaseAuth mAuth;
     DatabaseReference usersReference;
 
@@ -46,27 +54,24 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-
         initUI();
 
-        linearLayoutSignIn.setOnClickListener(new View.OnClickListener() {
+        llSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickGotoSignIn();
+                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
             }
         });
 
-        btnRegistration.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickRegistration();
             }
         });
+        inputChange();
     }
 
-    private void onClickGotoSignIn() {
-        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-    }
 
     private void onClickRegistration() {
         String name, email, password, confirmPassword, phone, address;
@@ -78,82 +83,271 @@ public class RegistrationActivity extends AppCompatActivity {
         phone = edtPhone.getText().toString().trim();
         address = edtAddress.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter name", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter confirm password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!password.equals(confirmPassword)) {
-            Toast.makeText(RegistrationActivity.this, "Confirm password is false", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter phone", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(address)) {
-            Toast.makeText(RegistrationActivity.this, "You need enter address", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (name.length() > 0 && email.length() > 0 && password.length() > 0 && confirmPassword.length() > 0 &&
+                phone.length() > 0 && address.length() > 0 && password.equals(confirmPassword)) {
+            if (isRegistrationClickable) {
+                progressBar.setVisibility(View.VISIBLE);
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                progressBar.setVisibility(View.GONE);
+                                if (task.isSuccessful()) {
+                                    if (mAuth.getCurrentUser() != null) {
 
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                            if (mAuth.getCurrentUser() != null) {
-
-                                FirebaseUser user = mAuth.getCurrentUser();
-//Lưu thông tin người dùng trên realtime database
-                                usersReference = FirebaseDatabase.getInstance().getReference("users");
-                                String userId = user.getUid();
-                                UserModel userModel = new UserModel(userId, name, email, phone, address);
-                                usersReference.child(userId).setValue(userModel);
-
-                                user.sendEmailVerification()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(RegistrationActivity.this, "Verification Email has been sent", Toast.LENGTH_SHORT).show();
-//                                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                                                startActivity(intent);
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(RegistrationActivity.this, "on Failure: Email not sent", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        //Lưu thông tin người dùng trên realtime database
+                                        usersReference = FirebaseDatabase.getInstance().getReference("users");
+                                        String userId = user.getUid();
+                                        UserModel userModel = new UserModel(userId, name, email, phone, address);
+                                        usersReference.child(userId).setValue(userModel);
+                                        user.sendEmailVerification()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(RegistrationActivity.this, "Verification Email has been sent", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(RegistrationActivity.this, "on Failure: Email not sent", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                } else {
+                                    Toast.makeText(RegistrationActivity.this, "Register Failure", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        } else {
-                            Toast.makeText(RegistrationActivity.this, "Register Failure", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                        });
+            }
+        } else {
+            if (name.length() == 0) {
+                tvNameError.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(email)) {
+                tvEmailError.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(phone)) {
+                tvPhoneError.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(address)) {
+                tvAddressError.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(password)) {
+                tvPasswordError.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(confirmPassword)) {
+                tvConfirmError.setVisibility(View.VISIBLE);
+            }
+            if (!password.equals(confirmPassword)) {
+                tvConfirmEqualError.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private void checkEmptyField(String name, String email, String phone, String address, String password, String confirmPassword) {
+        if (name.length() > 0 && tvNameError.getVisibility() == View.VISIBLE) {
+            tvNameError.setVisibility(View.GONE);
+        }
+        if (email.length() > 0 && tvEmailError.getVisibility() == View.VISIBLE) {
+            tvEmailError.setVisibility(View.GONE);
+        }
+        if (phone.length() > 0 && tvPhoneError.getVisibility() == View.VISIBLE) {
+            tvPhoneError.setVisibility(View.GONE);
+        }
+        if (address.length() > 0 && tvAddressError.getVisibility() == View.VISIBLE) {
+            tvAddressError.setVisibility(View.GONE);
+        }
+        if (password.length() > 0 && tvPasswordError.getVisibility() == View.VISIBLE) {
+            tvPasswordError.setVisibility(View.GONE);
+        }
+        if (confirmPassword.length() > 0 && tvConfirmError.getVisibility() == View.VISIBLE) {
+            tvConfirmError.setVisibility(View.GONE);
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    private void passwordCheck() {
+        String name, email, password, confirmPassword, phone, address;
+
+        name = edtName.getText().toString().trim();
+        email = edtEmail.getText().toString().trim();
+        password = edtPassword.getText().toString().trim();
+        confirmPassword = edtConfirmPassword.getText().toString().trim();
+        phone = edtPhone.getText().toString().trim();
+        address = edtAddress.getText().toString().trim();
+
+        checkEmptyField(name, email, phone, address, password, confirmPassword);
+
+        if (password.length() >= 9) {
+            isAtLeast9 = true;
+            cardOne.setCardBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
+        } else {
+            isAtLeast9 = false;
+            cardOne.setCardBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
+        }
+
+        if (password.matches("(.*[A-Z].*)")) {
+            hasUpperCase = true;
+            cardTwo.setCardBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
+        } else {
+            hasUpperCase = false;
+            cardTwo.setCardBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
+        }
+
+        if (password.matches("(.*[0-9].*)")) {
+            hasNumber = true;
+            cardThree.setCardBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
+        } else {
+            hasNumber = false;
+            cardThree.setCardBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
+        }
+
+        if (password.matches("^(?=.*[_.()@]).*$")) {
+            hasSymbol = true;
+            cardFour.setCardBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
+        } else {
+            hasSymbol = false;
+            cardFour.setCardBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
+        }
+
+        checkAllData(name, email, phone, address, password, confirmPassword);
+    }
+
+    @SuppressLint("ResourceType")
+    private void checkAllData(String name, String email, String phone, String address, String password, String confirmPassword) {
+        if (isAtLeast9 && hasUpperCase && hasNumber && hasSymbol && email.length() > 0 && name.length() > 0 &&
+                password.length() > 0 && confirmPassword.length() > 0 && phone.length() > 0 && address.length() > 0) {
+            isRegistrationClickable = true;
+            btnRegister.setBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
+        } else {
+            isRegistrationClickable = false;
+            btnRegister.setBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
+        }
+    }
+
+    private void inputChange() {
+        edtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtConfirmPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                passwordCheck();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void initUI() {
-        edtEmail = findViewById(R.id.edt_email);
-        edtName = findViewById(R.id.edt_name);
-        edtPassword = findViewById(R.id.edt_password);
-        edtConfirmPassword = findViewById(R.id.edt_confirm_password);
-        edtPhone = findViewById(R.id.edt_phone);
-        edtAddress = findViewById(R.id.edt_address);
-        btnRegistration = findViewById(R.id.btn_registration);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtName = findViewById(R.id.edtName);
+        edtPassword = findViewById(R.id.edtPassword);
+        edtConfirmPassword = findViewById(R.id.edtConfirmPassword);
+        edtPhone = findViewById(R.id.edtPhone);
+        edtAddress = findViewById(R.id.edtAddress);
+
+        btnRegister = findViewById(R.id.btnRegister);
+        llSignIn = findViewById(R.id.llSignIn);
         progressBar = findViewById(R.id.progressBar);
-        linearLayoutSignIn = findViewById(R.id.layout_sign_in);
+
+        tvNameError = findViewById(R.id.tvNameError);
+        tvEmailError = findViewById(R.id.tvEmailError);
+        tvPhoneError = findViewById(R.id.tvPhoneError);
+        tvAddressError = findViewById(R.id.tvAddressError);
+        tvPasswordError = findViewById(R.id.tvPasswordError);
+        tvConfirmError = findViewById(R.id.tvConfirmError);
+        tvConfirmEqualError = findViewById(R.id.tvConfirmEqualError);
+
+        cardOne = findViewById(R.id.cardOne);
+        cardTwo = findViewById(R.id.cardTwo);
+        cardThree = findViewById(R.id.cardThree);
+        cardFour = findViewById(R.id.cardFour);
     }
 }

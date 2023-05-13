@@ -1,34 +1,29 @@
 <resources>
     <string name="app_name">2SQTBooking</string>
     <string name="title_home">Home</string>
-    <string name="title_staying">My Staying</string>
-    <string name="title_fast_order">Fast Order</string>
+    <string name="title_staying" translatable="false">My Staying</string>
+    <string name="title_fast_order" translatable="false">Fast Order</string>
     <string name="title_user">Profile</string>
-    <string name="title_service">Services</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home page</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_my_staging">My staging</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="menu_user">User</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password</string>
-    <string name="change_password">Change Password</string>
-    <string name="confirm_password">Confirm password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Register</string>
-    <string name="logout">Log Out</string>
-    <string name="date_format">--/--/----</string>
-
-    <string name="address">125 Trần Phú, Văn Quán, Hà Đông, Hà Nội</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_pick_date">PickDateActivity</string>
+    <string name="title_service" translatable="false">Services</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="menu_home" translatable="false">Home page</string>
+    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_my_staging" translatable="false">My staging</string>
+    <string name="menu_user" translatable="false">User</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="forgot_password" translatable="false">Forgot Password</string>
+    <string name="change_password" translatable="false">Change Password</string>
+    <string name="confirm_password" translatable="false">Confirm password</string>
+    <string name="sign_in" translatable="false">Sign In</string>
+    <string name="sign_up" translatable="false">Register</string>
+    <string name="logout" translatable="false">Log Out</string>
+    <string name="date_format" translatable="false">--/--/----</string>
+    <string name="address" translatable="false">125 Trần Phú, Văn Quán, Hà Đông, Hà Nội</string>
+    <string name="title_activity_pick_date" translatable="false">PickDateActivity</string>
 </resources>

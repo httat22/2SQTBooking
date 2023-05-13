@@ -13,23 +13,27 @@
         android:theme="@style/Theme.Abc"
         tools:targetApi="31">
         <activity
-            android:name=".activities.DatePickerActivity"
-            android:exported="false" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:name=".activities.SentEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TestActivity"
+            android:exported="false">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.PaymentGolfActivity"
-            android:exported="true" >
-                         <intent-filter>
-                         <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-                         <category android:name="android.intent.category.LAUNCHER" />
-                         </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.PaymentTennisActivity"
@@ -39,45 +43,60 @@
             android:exported="false" />
         <activity
             android:name=".activities.ReserveFastBookingActivity"
-            android:exported="false" >
-<!--                        <intent-filter>-->
-<!--                            <action android:name="android.intent.action.MAIN" />-->
+            android:exported="false">
 
-<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                        </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.ReserveTennisActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activities.ReserveGolfActivity"
-            android:exported="false" >
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            android:exported="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.RegistrationActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false" />
+            android:exported="false">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity
             android:name=".activities.PaymentGymActivity"
             android:exported="false" />
@@ -92,26 +111,21 @@
             android:exported="false" />
         <activity
             android:name=".activities.BookRoomDetailActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activities.RoomTypeListActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".activities.WelcomeActivity"
             android:exported="false">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data

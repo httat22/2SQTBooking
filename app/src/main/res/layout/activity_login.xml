@@ -1,80 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="20dp"
-    android:layout_margin="40dp"
+    android:layout_marginHorizontal="40dp"
     tools:context=".activities.LoginActivity">
 
-    <ImageView
-        android:id="@+id/img_app"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/logo2"
-        />
-
-    <EditText
-        android:id="@+id/edt_email_login"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:maxLines="1"
-        android:textStyle="normal"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/edt_password_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:maxLines="1"
-        android:inputType="textPassword"/>
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/btn_SignIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_bg"
-        android:text="@string/sign_in" />
-
-
-    <TextView
-        android:id="@+id/tv_forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/forgot_password"/>
-
-
     <LinearLayout
-        android:id="@+id/layout_registration"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You don't have an account?"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:textColor="#F40729"
-            android:text="Register"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/ntt_login"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="Welcome to 2SQT Hotel Booking"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in to your account"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_height="60dp">
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:hint="Enter email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvEmailError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter email"
+            android:textColor="@color/red_color"
+            android:visibility="gone"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true">
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:hint="Enter password"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvPasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter password"
+            android:textColor="@color/red_color"
+            android:visibility="gone"
+            />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/colorDefault">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Sign In"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+        </androidx.cardview.widget.CardView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/llForgotPassword"
+            android:layout_marginVertical="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password"
+                android:textColor="@color/color_button"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llSignUp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You don't have an account? "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_button"
+                android:text="Sign up"/>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

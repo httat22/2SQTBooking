@@ -35,7 +35,7 @@ public class BookRoomDetailActivity extends AppCompatActivity{
     private Button btnBookNow, btnCheckIn, btnCheckOut;
     private ImageButton btnBack;
     private ImageView imageRoom;
-    private TextView tvNameRoom, tvPrice;
+    private TextView tvNameRoom, tvPrice, tvNumberPerson;
 
     private RoomTypeModel roomTypeModel;
     private BookRoomModel bookRoomModel;
@@ -108,6 +108,14 @@ public class BookRoomDetailActivity extends AppCompatActivity{
         tvNameRoom.setText(roomTypeModel.getRoom());
         String stringPrice = roomTypeModel.getPrice() + "$";
         tvPrice.setText(stringPrice);
+
+        String numberSingle = "2 Adults";
+        String numberDouble = "4 Adults";
+        if (roomTypeModel.getRoomType().equals("single")) {
+            tvNumberPerson.setText(numberSingle);
+        } else {
+            tvNumberPerson.setText(numberDouble);
+        }
     }
 
     private void initUI() {
@@ -118,6 +126,7 @@ public class BookRoomDetailActivity extends AppCompatActivity{
         imageRoom = findViewById(R.id.imageRoom);
         tvNameRoom = findViewById(R.id.tvNameRoom);
         tvPrice = findViewById(R.id.tvPrice);
+        tvNumberPerson = findViewById(R.id.tvNumberPerson);
     }
 
     public void pickCheckInDate_click() {

@@ -47,9 +47,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
         holder.tvNumberAndPrice.setText(s);
         holder.tvTime.setText(ticketModel.getTime());
-        if (ticketModel.getStatus().equals("checkIn")) {
-            holder.imageStatus.setVisibility(View.VISIBLE);
-        }
+//        if (ticketModel.getStatus().equals("checkIn")) {
+//            holder.imageStatus.setVisibility(View.VISIBLE);
+//        }
         if (!ticketModel.getNameType().equals("Booking Room")) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#E5EFCB"));
             holder.tvDescription.setText(ticketModel.getNameType());

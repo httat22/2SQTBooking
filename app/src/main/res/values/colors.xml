@@ -15,4 +15,9 @@
         <color name="shimmer_color">#dddddd</color>
         <color name="ticket_service_staying_color">#E5EFCB</color>
         <color name="my_booking_staying_color">#F8D7D7</color>
+        <color name="color_button">#0165FF</color>
+        <color name="red_color">#F30505</color>
+        <color name="colorAccent">#03DAC5</color>
+        <color name="colorDefault">#dcdcdc</color>
+        <color name="colorPrimary">#fe6f89</color>
 </resources>

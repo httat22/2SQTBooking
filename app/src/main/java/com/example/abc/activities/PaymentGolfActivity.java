@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.example.abc.models.BookServiceModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class PaymentGolfActivity extends AppCompatActivity {
@@ -28,6 +30,9 @@ public class PaymentGolfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_golf);
         getSupportActionBar().hide();
+
+        Locale locale = getResources().getConfiguration().locale;
+        Log.e("country", locale.getCountry());
 
         imgBackHome = findViewById(R.id.imgBackHome);
         tvNameTicket = findViewById(R.id.tvNameTicket);

@@ -42,10 +42,10 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
         if (roomTypeModel == null) return;
 
         String price = roomTypeModel.getPrice() + "$/night";
-
         Glide.with(context).load(roomTypeModel.getImageURL()).into(holder.imageView);
         holder.tvTypeRoom.setText(roomTypeModel.getRoom());
         holder.tvPrice.setText(price);
+        holder.tvDescription.setText(roomTypeModel.getDescription());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +76,13 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvTypeRoom, tvPrice;
+        TextView tvTypeRoom, tvPrice, tvDescription;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageRoomItem);
             tvTypeRoom = itemView.findViewById(R.id.tvTypeRoom);
             tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
         }
     }
 }

@@ -4,17 +4,26 @@ import java.io.Serializable;
 
 public class RoomTypeModel implements Serializable {
     int numberRoomAvailable;
-    String roomId, room, imageURL, description;
+    String roomId, room, imageURL, description, roomType;
     int price;
 
     public RoomTypeModel() {
     }
 
-    public RoomTypeModel(String roomId, String room, String imageURL, int price) {
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public RoomTypeModel(String roomId, String room, String imageURL, String roomType, int price) {
         this.roomId = roomId;
         this.room = room;
         this.price = price;
         this.imageURL = imageURL;
+        this.roomType = roomType;
     }
 
     public String getDescription() {
