@@ -97,7 +97,6 @@ public class UserFragment extends Fragment {
                                 }
                             }
                         });
-
                     }
                 });
                 myDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -6,12 +6,11 @@ import android.os.Bundle;
 
 import com.example.abc.R;
 
-public class TestActivity extends AppCompatActivity {
+public class ManagerListUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ntt_user);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_manager_list_user);
     }
 }

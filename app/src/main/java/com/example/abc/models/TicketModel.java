@@ -1,7 +1,38 @@
 package com.example.abc.models;
 
 public class TicketModel {
-    String userId, nameType, time, imageURL, ticketId, description, status;
+    int price, numberPerson;
+    String userId, nameType, dateArrive, dateLeave, imageURL, ticketId, description, status, roomId, userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    long dateBooked;
+
+    public long getDateBooked() {
+        return dateBooked;
+    }
+
+    public void setDateBooked(long dateBooked) {
+        this.dateBooked = dateBooked;
+    }
+
+    public String getDateLeave() {
+        return dateLeave;
+    }
+
+    public void setDateLeave(String dateLeave) {
+        this.dateLeave = dateLeave;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
 
     public String getStatus() {
         return status;
@@ -19,29 +50,47 @@ public class TicketModel {
         this.description = description;
     }
 
-    int price, numberPerson;
-
-    public TicketModel() {}
+    public TicketModel() {
+    }
 
     public String getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(String ticketId) {
-        this.ticketId = ticketId;
-    }
 
-    public TicketModel(String userId, String nameType, String time, String imageURL,
-                       int price, int numberPerson, String ticketId, String description, String status) {
+    public TicketModel(String userId, String nameType, String dateArrive, String dateLeave, String imageURL,
+                       int price, int numberPerson, String ticketId, String description,
+                       String status, String roomId, long dateBooked, String userName) {
         this.ticketId = ticketId;
         this.userId = userId;
         this.nameType = nameType;
-        this.time = time;
+        this.dateArrive = dateArrive;
+        this.dateLeave = dateLeave;
         this.imageURL = imageURL;
         this.price = price;
         this.numberPerson = numberPerson;
         this.description = description;
         this.status = status;
+        this.roomId = roomId;
+        this.dateBooked = dateBooked;
+        this.userName = userName;
+    }
+
+    public TicketModel(String userId, String nameType, String dateArrive, String dateLeave, String imageURL,
+                       int price, int numberPerson, String ticketId, String description,
+                       String status, long dateBooked, String userName) {
+        this.ticketId = ticketId;
+        this.userId = userId;
+        this.nameType = nameType;
+        this.dateArrive = dateArrive;
+        this.dateLeave = dateLeave;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.numberPerson = numberPerson;
+        this.description = description;
+        this.status = status;
+        this.dateBooked = dateBooked;
+        this.userName = userName;
     }
 
     public TicketModel(String nameType) {
@@ -52,10 +101,6 @@ public class TicketModel {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getNameType() {
         return nameType;
     }
@@ -64,12 +109,12 @@ public class TicketModel {
         this.nameType = nameType;
     }
 
-    public String getTime() {
-        return time;
+    public String getDateArrive() {
+        return dateArrive;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateArrive(String dateArrive) {
+        this.dateArrive = dateArrive;
     }
 
     public String getImageURL() {
@@ -102,7 +147,7 @@ public class TicketModel {
         return "TicketModel{" +
                 "userId='" + userId + '\'' +
                 ", nameType='" + nameType + '\'' +
-                ", time='" + time + '\'' +
+                ", time='" + dateArrive + '\'' +
                 ", imageURL='" + imageURL + '\'' +
                 ", price=" + price +
                 ", numberPerson=" + numberPerson +

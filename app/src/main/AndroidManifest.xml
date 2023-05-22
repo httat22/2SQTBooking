@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,22 +17,55 @@
         android:theme="@style/Theme.Abc"
         tools:targetApi="31">
         <activity
-            android:name=".activities.UserInfoActivity"
-            android:exported="false" >
-
-        </activity>
-        <activity
-            android:name=".activities.SentEmailActivity"
+            android:name=".activities.ManagerReservedRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.TestActivity"
+            android:name=".activities.ManagerListUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ManagerListRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_manager">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCszteVaJ77drlbOdB04pdYhG0v0UhXFV0" />
+
+        <activity
+            android:name=".MapActivity"
             android:exported="false">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
+        <activity
+            android:name=".activities.UserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SentEmailActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.PaymentGolfActivity"
             android:exported="false">
@@ -72,17 +109,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".activities.RegistrationActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
             android:exported="false">

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
 import com.example.abc.models.TicketModel;
-import com.google.firebase.database.core.Context;
 
 import java.util.List;
 
@@ -44,9 +43,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
         String s = ticketModel.getNumberPerson() + " Adult  -  " + ticketModel.getPrice() + "$";
         String s2 = ticketModel.getNameType() + " - " + ticketModel.getDescription();
+        String time = ticketModel.getDateArrive() + " - " + ticketModel.getDateLeave();
 
         holder.tvNumberAndPrice.setText(s);
-        holder.tvTime.setText(ticketModel.getTime());
+
+        holder.tvTime.setText(time);
 //        if (ticketModel.getStatus().equals("checkIn")) {
 //            holder.imageStatus.setVisibility(View.VISIBLE);
 //        }

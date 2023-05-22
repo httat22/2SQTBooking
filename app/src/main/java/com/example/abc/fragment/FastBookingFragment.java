@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.abc.R;
+import com.example.abc.models.InfoRoomBookedModel;
 import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +44,9 @@ public class FastBookingFragment extends Fragment {
     View view;
 
     private DatabaseReference userStayingRef = FirebaseDatabase.getInstance().getReference("user_staying");
-    ;
+    private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
+    private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
     private DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("Room");
     private String dateArrive, dateLeave;
     private List<String> listRangeTime;
@@ -178,24 +180,42 @@ public class FastBookingFragment extends Fragment {
 
                 onClickAddTimeToRealTimeDatabase(roomId, roomTypeModel.getRoomType());
 
-                String userId, nameType, time, imageURL, ticketId, description;
+                String userId, nameType, imageURL, ticketId, description, roomId, userName;
                 int price, numberPerson;
 
+                long currentTime = System.currentTimeMillis();
+
                 userId = user.getUid();
+                userName = user.getDisplayName();
                 nameType = "Booking Room";
-                time = dateArrive + " - " + dateLeave;
                 imageURL = roomTypeModel.getImageURL();
                 ticketId = "Fast" + roomTypeModel.getRoomId() + System.currentTimeMillis();
                 price = roomTypeModel.getPrice();
-                numberPerson = 2;
+                if (roomTypeModel.getRoomType().equals("single")) {
+                    numberPerson = 2;
+                } else {
+                    numberPerson = 4;
+                }
                 description = roomTypeModel.getRoom();
-                TicketModel ticketModel = new TicketModel(userId, nameType, time, imageURL, price, numberPerson, ticketId, description, "checkIn");
+                roomId = roomTypeModel.getRoomId();
+                TicketModel ticketModel = new TicketModel(userId, nameType, dateArrive, dateLeave, imageURL,
+                        price, numberPerson, ticketId, description, "checkIn",  roomId, currentTime, userName);
                 userStayingRef.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, dateArrive, dateLeave, numberPerson, currentTime, userId);
+                dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
             }
 
             @Override

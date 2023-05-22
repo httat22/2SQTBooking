@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/main" />
 
         <ImageView
-            android:id="@+id/imageView51"
+            android:id="@+id/imgLogo"
             android:layout_width="100dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
@@ -318,6 +318,17 @@
 
         </androidx.cardview.widget.CardView>
 
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewservice">
+        </FrameLayout>
+
         <TextView
             android:id="@+id/textView98"
             android:layout_width="wrap_content"
@@ -331,7 +342,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardviewservice" />
+            app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
 
         <TextView
             android:id="@+id/textView99"
@@ -895,111 +906,105 @@
         <TextView
             android:id="@+id/textView104"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/recently_viewed_rooms"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:layout_height="150dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/proposedroom" />
 
-        <HorizontalScrollView
-            android:id="@+id/recentlyroom"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView104">
+<!--        <HorizontalScrollView-->
+<!--            android:id="@+id/recentlyroom"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:layout_marginBottom="200dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView104">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal">-->
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="24dp"
-                    app:cardCornerRadius="24dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginRight="24dp"-->
+<!--                    app:cardCornerRadius="24dp">-->
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent">-->
 
-                        <ImageView
-                            android:layout_width="300dp"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/roomm" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="300dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            app:srcCompat="@drawable/roomm" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="231dp"
-                            android:layout_marginTop="38dp"
-                            android:layout_marginEnd="4dp"
-                            android:text=""
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentStart="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_marginStart="231dp"-->
+<!--                            android:layout_marginTop="38dp"-->
+<!--                            android:layout_marginEnd="4dp"-->
+<!--                            android:text=""-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textColor="@color/white"-->
+<!--                            android:textSize="28sp"-->
+<!--                            android:textStyle="bold" />-->
 
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/recentlyroom1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="24dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    app:shapeAppearanceOverlay="@style/roundimageviewbig"
-                    app:srcCompat="@drawable/homepagepropose2">
-
-                </com.google.android.material.imageview.ShapeableImageView>
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/recentlyroom2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="24dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    app:shapeAppearanceOverlay="@style/roundimageviewbig"
-                    app:srcCompat="@drawable/homepagepropose1">
-
-                </com.google.android.material.imageview.ShapeableImageView>
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/recentlyroom3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="24dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    app:shapeAppearanceOverlay="@style/roundimageviewbig"
-                    app:srcCompat="@drawable/homepagepropose6">
-
-                </com.google.android.material.imageview.ShapeableImageView>
+<!--                    </RelativeLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
 
-            </LinearLayout>
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/recentlyroom1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginRight="24dp"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    app:shapeAppearanceOverlay="@style/roundimageviewbig"-->
+<!--                    app:srcCompat="@drawable/homepagepropose2">-->
 
-        </HorizontalScrollView>
+<!--                </com.google.android.material.imageview.ShapeableImageView>-->
+
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/recentlyroom2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginRight="24dp"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    app:shapeAppearanceOverlay="@style/roundimageviewbig"-->
+<!--                    app:srcCompat="@drawable/homepagepropose1">-->
+
+<!--                </com.google.android.material.imageview.ShapeableImageView>-->
+
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/recentlyroom3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginRight="24dp"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    app:shapeAppearanceOverlay="@style/roundimageviewbig"-->
+<!--                    app:srcCompat="@drawable/homepagepropose6">-->
+
+<!--                </com.google.android.material.imageview.ShapeableImageView>-->
+
+
+<!--            </LinearLayout>-->
+
+<!--        </HorizontalScrollView>-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

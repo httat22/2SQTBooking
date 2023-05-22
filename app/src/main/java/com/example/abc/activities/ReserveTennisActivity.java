@@ -42,8 +42,8 @@ public class ReserveTennisActivity extends AppCompatActivity {
     private String dateArrive, dateLeave;
     private BookServiceModel bookServiceModel;
     private DatabaseReference databaseReference;
-
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_tennis_booked");
+    private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +88,14 @@ public class ReserveTennisActivity extends AppCompatActivity {
         if (user == null) {
             return;
         }
-        String userId, nameType, time, imageURL, ticketId, description;
+        String userId, nameType, imageURL, ticketId, description, userName;
         int numberPerson;
+
+        long currentTime = System.currentTimeMillis();
+
         userId = user.getUid();
+        userName = user.getDisplayName();
         nameType = "Tennis Courses Club Ticket";
-        time = bookServiceModel.getDateArrive() + " - " + bookServiceModel.getDateLeave();
         imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/tennis%2Ftennis2.jpg?alt=media&token=ea267312-95f2-46c6-98d3-fcf3fdd11c22";
         ticketId = "Tennis" + userId + System.currentTimeMillis();
 
@@ -101,8 +104,17 @@ public class ReserveTennisActivity extends AppCompatActivity {
         int totalPayment = numberPerson*numOfDate*bookServiceModel.getPrice();
         bookServiceModel.setTotalPayment(totalPayment);
         description = "";
-        TicketModel ticketModel = new TicketModel(userId, nameType, time, imageURL, totalPayment, numberPerson, ticketId, description, "reserved");
+        TicketModel ticketModel = new TicketModel(userId, nameType, bookServiceModel.getDateArrive(),
+                bookServiceModel.getDateLeave(), imageURL, totalPayment, numberPerson, ticketId,
+                description, "reserved", currentTime, userName);
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();

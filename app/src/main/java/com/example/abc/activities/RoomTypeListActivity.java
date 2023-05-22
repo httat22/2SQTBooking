@@ -59,25 +59,6 @@ public class RoomTypeListActivity extends AppCompatActivity {
     }
 
     private void getRoomModelListFromRealTimeDatabase() {
-//        Cach 1
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (roomModelList != null) {
-//                    roomModelList.clear();
-//                }
-//                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-//                    RoomModel roomModel = (RoomModel) dataSnapshot.getValue(RoomModel.class);
-//                    roomModelList.add(roomModel);
-//                }
-//                roomAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

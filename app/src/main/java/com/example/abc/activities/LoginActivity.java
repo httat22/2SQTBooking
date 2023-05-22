@@ -16,12 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.abc.MainActivity;
 import com.example.abc.R;
 import com.example.abc.models.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,13 +44,14 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean isRegistrationClickable = false;
     private LinearLayout llForgotPassword, llSignUp;
+    private final int MAX_LOGIN_ATTEMPTS = 5;
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null && mAuth.getCurrentUser().isEmailVerified()){
+        if (currentUser != null && mAuth.getCurrentUser().isEmailVerified()) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
@@ -88,56 +89,121 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onClickSingIn() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
         String email, password;
         email = String.valueOf(edtEmail.getText());
         password = String.valueOf(edtPassword.getText());
 
         if (email.length() > 0 && password.length() > 0) {
             if (isRegistrationClickable) {
-                progressBar.setVisibility(View.VISIBLE);
                 userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                             UserModel userModel = childSnapshot.getValue(UserModel.class);
                             assert userModel != null;
                             String salt = userModel.getSalt();
+                            String userId = userModel.getUserId();
                             String saltedPassword = password + salt;
                             String hashedPassword = hash(saltedPassword) + salt;
-
-                            mAuth.signInWithEmailAndPassword(email, hashedPassword)
+                            progressBar.setVisibility(View.VISIBLE);
+                            mAuth.signInWithEmailAndPassword(email, password)
                                     .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
+                                            progressBar.setVisibility(View.GONE);
                                             if (task.isSuccessful()) {
-                                                progressBar.setVisibility(View.GONE);
-                                                if (task.isSuccessful()) {
-                                                    FirebaseUser user = mAuth.getCurrentUser();
-                                                    if (user != null) {
-                                                        if (user.isEmailVerified()) {
-                                                            Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(getApplication(), MainActivity.class);
-                                                            startActivity(intent);
-                                                            finishAffinity();
-                                                        } else {
-                                                            Toast.makeText(LoginActivity.this, "Please verify your email!", Toast.LENGTH_SHORT).show();
-                                                        }
+                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                if (user != null) {
+                                                    if (user.isEmailVerified()) {
+//                                                        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(LoginActivity.this);
+//                                                        Bundle bundle = new Bundle();
+//                                                        bundle.putString(email, "email");
+//                                                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+                                                        userRef.child(userId).child("lastFailedLoginTime")
+                                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                        Long lastFailedLoginTime = snapshot.getValue(Long.class);
+                                                                        if (lastFailedLoginTime != null && System.currentTimeMillis() - lastFailedLoginTime < 60 * 1000) {
+                                                                            long timeDuration = (System.currentTimeMillis() - lastFailedLoginTime)/60/1000 + 1;
+                                                                            String s = "Wait " + timeDuration + " minutes to login";
+                                                                            Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+                                                                        } else {
+                                                                            userRef.child(user.getUid()).child("loginAttempts").setValue(0);
+                                                                            Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                                                            Intent intent = new Intent(getApplication(), MainActivity.class);
+                                                                            startActivity(intent);
+                                                                            finishAffinity();
+                                                                        }
+                                                                    }
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError error) {}
+                                                                });
+
+
+
+
+                                                    } else {
+                                                        Toast.makeText(LoginActivity.this, "Please verify your email!", Toast.LENGTH_SHORT).show();
                                                     }
-                                                } else {
-                                                    Toast.makeText(LoginActivity.this, "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
                                                 }
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, "Sign in failed!", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            else {
+                                                userRef.child(userId).child("lastFailedLoginTime")
+                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                Long lastFailedLoginTime = snapshot.getValue(Long.class);
+                                                                if (lastFailedLoginTime != null && System.currentTimeMillis() - lastFailedLoginTime < 60 * 1000) {
+                                                                    long timeDuration = (System.currentTimeMillis() - lastFailedLoginTime)/60/1000 + 1;
+                                                                    String s = "Wait " + timeDuration + " minutes to login";
+                                                                    Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+                                                                } else {
+                                                                    userRef.child(userId)
+                                                                            .child("loginAttempts")
+                                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                @Override
+                                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                    Integer loginAttempts = snapshot.getValue(Integer.class);
+                                                                                    loginAttempts++;
+                                                                                    Toast.makeText(getApplication(), String.valueOf(loginAttempts), Toast.LENGTH_SHORT).show();
+                                                                                    userRef.child(userId).child("loginAttempts").setValue(loginAttempts);
+//
+                                                                                    if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                                                                                        long currentTimeMillis = System.currentTimeMillis();
+                                                                                        userRef.child(userId)
+                                                                                                .child("lastFailedLoginTime").setValue(currentTimeMillis);
+
+                                                                                        userRef.child(userId).child("loginAttempts").setValue(0);
+                                                                                        Toast.makeText(getApplication(), "You entered the wrong password beyond the allowed limit, please wait 10 minutes to continue.", Toast.LENGTH_SHORT).show();
+                                                                                    } else {
+                                                                                        // Hiển thị thông báo cho người dùng về số lần đăng nhập sai còn lại.
+                                                                                        Toast.makeText(LoginActivity.this, "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
+                                                                                        String message = "You have " + (MAX_LOGIN_ATTEMPTS -  loginAttempts) + " more password attempts";
+                                                                                        Toast.makeText(getApplication(), message, Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onCancelled(@NonNull DatabaseError error) {}
+                                                                            });
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                            }
+                                                        });
                                             }
                                         }
                                     });
                         }
                     }
-
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
+                    public void onCancelled(@NonNull DatabaseError error) {}
                 });
             }
         } else {
@@ -162,7 +228,7 @@ public class LoginActivity extends AppCompatActivity {
         if (password.length() > 0 && tvPasswordError.getVisibility() == View.VISIBLE) {
             tvPasswordError.setVisibility(View.GONE);
         }
-        if ( email.length() > 0 && password.length() > 0) {
+        if (email.length() > 0 && password.length() > 0) {
             isRegistrationClickable = true;
             btnSignIn.setBackgroundColor(Color.parseColor(getString(R.color.colorAccent)));
         } else {
@@ -170,6 +236,7 @@ public class LoginActivity extends AppCompatActivity {
             btnSignIn.setBackgroundColor(Color.parseColor(getString(R.color.colorDefault)));
         }
     }
+
     private void inputChange() {
         edtEmail.addTextChangedListener(new TextWatcher() {
             @Override

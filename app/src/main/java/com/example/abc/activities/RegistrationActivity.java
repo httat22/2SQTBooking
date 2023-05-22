@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -90,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 phone.length() > 0 && address.length() > 0 && password.equals(confirmPassword)) {
             if (isRegistrationClickable) {
                 progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(email, hashedPassword)
+                mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -104,6 +105,11 @@ public class RegistrationActivity extends AppCompatActivity {
                                         String userId = user.getUid();
                                         UserModel userModel = new UserModel(userId, name, email, phone, address, salt);
                                         usersReference.child(userId).setValue(userModel);
+
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(name)
+                                                .build();
+                                        user.updateProfile(profileUpdates);
                                         user.sendEmailVerification()
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override

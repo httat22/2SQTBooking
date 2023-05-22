@@ -2,6 +2,24 @@ package com.example.abc.models;
 
 public class UserModel {
     String userId, userName, email, phone, address, salt;
+    int loginAttempts;
+    long lastFailedLoginTime;
+
+    public int getLoginAttempts() {
+        return loginAttempts;
+    }
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
+    }
+
+    public long getLastFailedLoginTime() {
+        return lastFailedLoginTime;
+    }
+
+    public void setLastFailedLoginTime(long lastFailedLoginTime) {
+        this.lastFailedLoginTime = lastFailedLoginTime;
+    }
 
     public UserModel() {}
 
@@ -28,6 +46,8 @@ public class UserModel {
         this.phone = phone;
         this.address = address;
         this.salt = salt;
+        this.loginAttempts = 0;
+        this.lastFailedLoginTime = 0;
     }
 
     public String getUserName() {

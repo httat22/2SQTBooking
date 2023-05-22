@@ -132,7 +132,7 @@ public class BookRoomDetailActivity extends AppCompatActivity{
     public void pickCheckInDate_click() {
         List<String> disableTime = new ArrayList<>();
         String path = String.valueOf(roomTypeModel.getRoomId());
-        timeRef.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+        timeRef.child(roomTypeModel.getRoomType()).child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot time: snapshot.getChildren()) {
@@ -181,7 +181,7 @@ public class BookRoomDetailActivity extends AppCompatActivity{
     public void pickCheckOutDate_click() {
         List<String> disableTime = new ArrayList<>();
         String path = String.valueOf(roomTypeModel.getRoomId());
-        timeRef.child(path).addListenerForSingleValueEvent(new ValueEventListener() {
+        timeRef.child(roomTypeModel.getRoomType()).child(path).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot time: snapshot.getChildren()) {

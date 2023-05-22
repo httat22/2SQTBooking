@@ -67,7 +67,7 @@ public class UserInfoActivity extends AppCompatActivity {
         databaseReference.child(uid).child("phone").setValue(edtUserPhone.getText().toString().trim());
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(edtUserName.getText().toString().trim())
+//                .setDisplayName(edtUserName.getText().toString().trim())
                 .setPhotoUri(imageUri)
                 .build();
         progressBar.setVisibility(View.VISIBLE);
@@ -130,13 +130,17 @@ public class UserInfoActivity extends AppCompatActivity {
         databaseReference.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null) {
+                    return;
+                }
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         DataSnapshot dataSnapshot = task.getResult();
                         String name = String.valueOf(dataSnapshot.child("userName").getValue());
                         String address = String.valueOf(dataSnapshot.child("address").getValue());
                         String phone = String.valueOf(dataSnapshot.child("phone").getValue());
-                        edtUserName.setText(name);
+                        edtUserName.setText(user.getDisplayName());
                         edtUserAddress.setText(address);
                         edtUserPhone.setText(phone);
                     }

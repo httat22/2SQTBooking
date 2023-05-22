@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
 import com.example.abc.models.BookRoomModel;
+import com.example.abc.models.InfoRoomBookedModel;
 import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +42,8 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
     private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson;
     private DatabaseReference databaseReference;
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
+    private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
+    private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,11 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickAddRealtimeDatabase();
+                try {
+                    onClickAddRealtimeDatabase();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 Intent intent = new Intent(getApplication(), PaymentRoomActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("object_roomTypeModel", roomTypeModel);
@@ -82,31 +89,50 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         });
     }
 
-    private void onClickAddRealtimeDatabase() {
+    private void onClickAddRealtimeDatabase() throws ParseException {
         databaseReference = FirebaseDatabase.getInstance().getReference("user_staying");
         onClickAddTimeToRealTimeDatabase();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             return;
         }
-        String userId, nameType, time, imageURL, ticketId, description;
+        String userId, nameType, imageURL, ticketId, description, roomId, userName;
         int price, numberPerson;
 
+        long currentTime = System.currentTimeMillis();
+
         userId = user.getUid();
+        userName = user.getDisplayName();
         nameType = "Booking Room";
-        time = bookRoomModel.getDateArrive() + " - " + bookRoomModel.getDateLeave();
         imageURL = roomTypeModel.getImageURL();
         ticketId = "Room" + roomTypeModel.getRoomId() + System.currentTimeMillis();
         price = bookRoomModel.getTotalPayment();
-        numberPerson = 2;
+        if (roomTypeModel.getRoomType().equals("single")) {
+            numberPerson = 2;
+        } else {
+            numberPerson = 4;
+        }
         description = roomTypeModel.getRoom();
-        TicketModel ticketModel = new TicketModel(userId, nameType, time, imageURL, price, numberPerson, ticketId, description, "checkIn");
+        roomId = roomTypeModel.getRoomId();
+        TicketModel ticketModel = new TicketModel(userId, nameType, bookRoomModel.getDateArrive(), bookRoomModel.getDateLeave(),
+                imageURL, price, numberPerson, ticketId, description, "checkIn", roomId, currentTime, userName);
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
             }
         });
+
+        listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, bookRoomModel.getDateArrive(),
+                bookRoomModel.getDateLeave(), numberPerson, currentTime, userId);
+        dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
     }
 
     private void onClickAddTimeToRealTimeDatabase() {

@@ -1,6 +1,10 @@
 package com.example.abc.models;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RoomTypeModel implements Serializable {
     int numberRoomAvailable;
@@ -85,5 +89,14 @@ public class RoomTypeModel implements Serializable {
                 ", price='" + price + '\'' +
                 ", imageURL='" + imageURL + '\'' +
                 '}';
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("description", description);
+        result.put("price", price);
+        result.put("room", room);
+        return result;
     }
 }
