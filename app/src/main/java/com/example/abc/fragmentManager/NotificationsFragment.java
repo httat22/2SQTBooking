@@ -53,10 +53,6 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void getDataFromRealTimeDatabase() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            return;
-        }
         databaseReference.orderByChild("dateBooked").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

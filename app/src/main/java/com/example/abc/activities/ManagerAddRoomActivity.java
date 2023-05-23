@@ -25,8 +25,11 @@ import android.widget.Toast;
 
 import com.example.abc.R;
 import com.example.abc.models.RoomTypeModel;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -108,40 +111,48 @@ public class ManagerAddRoomActivity extends AppCompatActivity {
         if (mImageUri != null) {
             StorageReference fileRef = storageReference.child(String.valueOf(currentTime)).child(currentTime +
                     "." + getFileExtension(mImageUri));
-            fileRef.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(ManagerAddRoomActivity.this, "Upload successful!", Toast.LENGTH_SHORT).show();
-                            String roomName = edtRoomName.getText().toString().trim();
-                            String description = edtDescription.getText().toString().trim();
-                            String price = edtPrice.getText().toString().trim();
-                            String roomType;
-                            if (isSingleRoom) {
-                                roomType = "single";
-                            } else {
-                                roomType = "double";
-                            }
-                            RoomTypeModel roomTypeModel = new RoomTypeModel();
-                            roomTypeModel.setRoom(roomName);
-                            roomTypeModel.setPrice(Integer.parseInt(price));
-                            roomTypeModel.setDescription(description);
-                            roomTypeModel.setRoomType(roomType);
-                            roomTypeModel.setRoomId(String.valueOf(currentTime));
-                            roomTypeModel.setImageURL(taskSnapshot.getUploadSessionUri().toString());
-                            databaseReference.child(roomTypeModel.getRoomId()).setValue(roomTypeModel);
+
+            UploadTask uploadTask = fileRef.putFile(mImageUri);
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return fileRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        Toast.makeText(ManagerAddRoomActivity.this, "Add successful!", Toast.LENGTH_SHORT).show();
+                        String roomName = edtRoomName.getText().toString().trim();
+                        String description = edtDescription.getText().toString().trim();
+                        String price = edtPrice.getText().toString().trim();
+                        String roomType;
+                        if (isSingleRoom) {
+                            roomType = "single";
+                        } else {
+                            roomType = "double";
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ManagerAddRoomActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-        else {
-            Toast.makeText(ManagerAddRoomActivity.this, "NO!", Toast.LENGTH_SHORT).show();
-            return;
+                        RoomTypeModel roomTypeModel = new RoomTypeModel();
+
+                        roomTypeModel.setRoom(roomName);
+                        roomTypeModel.setPrice(Integer.parseInt(price));
+                        roomTypeModel.setDescription(description);
+                        roomTypeModel.setRoomType(roomType);
+                        roomTypeModel.setRoomId(String.valueOf(currentTime));
+                        roomTypeModel.setImageURL(downloadUri.toString());
+
+                        databaseReference.child(roomTypeModel.getRoomId()).setValue(roomTypeModel);
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(ManagerAddRoomActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.abc.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class PaymentRoomActivity extends AppCompatActivity {
     ImageView imageLogo, imageView;
     private RoomTypeModel roomTypeModel;
     private BookRoomModel bookRoomModel;
+    private ImageButton btnBack;
 
     private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson;
 
@@ -42,9 +44,10 @@ public class PaymentRoomActivity extends AppCompatActivity {
         tvPriceResult = findViewById(R.id.tvPriceResult);
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
         tvNumberPerson = findViewById(R.id.tvNumberPerson);
+        btnBack = findViewById(R.id.btnBack);
 
         getDataFromConfirmBookRoom();
-        imageLogo.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentRoomActivity.this, MainActivity.class);

@@ -87,6 +87,8 @@ public class RoomTypeModel implements Serializable {
         result.put("description", description);
         result.put("price", price);
         result.put("room", room);
+        result.put("roomType", roomType);
+        result.put("imageURL", imageURL);
         return result;
     }
 }

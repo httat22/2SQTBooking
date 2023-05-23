@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class PaymentTennisActivity extends AppCompatActivity {
     private BookServiceModel bookServiceModel;
 
     private ImageView imgBackHome;
+    private ImageButton btnBack;
     private TextView tvNameTicket, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult,tvPriceTotal;
 
     @Override
@@ -38,9 +40,10 @@ public class PaymentTennisActivity extends AppCompatActivity {
         tvPriceMul = findViewById(R.id.tvPriceMul);
         tvPriceResult = findViewById(R.id.tvPriceResult);
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
+        btnBack = findViewById(R.id.btnBack);
 
         getDataFromReserveGymActivity();
-        imgBackHome.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PaymentTennisActivity.this, MainActivity.class);

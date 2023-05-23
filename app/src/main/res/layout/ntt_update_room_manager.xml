@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    android:background="#00000000">
+    android:background="#00000000"
+    tools:context=".activities.ManagerUpdateRoomActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,6 +74,42 @@
                         android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type Room:"
+                android:textSize="16sp"
+                android:layout_weight="0.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSingleRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Single Room"
+                    android:textColor="#4C4A4A"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorDefault"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDoubleRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Double room"
+                    android:textColor="#4C4A4A"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/colorDefault"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,7 +1,10 @@
 package com.example.abc;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.example.abc.fragmentManager.AccountFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,11 @@ import com.example.abc.databinding.ActivityManagerBinding;
 public class ManagerActivity extends AppCompatActivity {
 
     private ActivityManagerBinding binding;
+    private String email = "";
+
+    public String getEmail() {
+        return email;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,16 @@ public class ManagerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_manager);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navViewManager, navController);
-    }
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            email = intent.getStringExtra("email");
+
+            Bundle bundle = new Bundle();
+            bundle.putString("email", email);
+
+            AccountFragment fragment = new AccountFragment();
+            fragment.setArguments(bundle);
+        }
+    }
 }

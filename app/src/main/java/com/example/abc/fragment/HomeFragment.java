@@ -36,14 +36,6 @@ public class HomeFragment extends Fragment {
         cvGolf = root.findViewById(R.id.cv_golf);
         imgLogo = root.findViewById(R.id.imgLogo);
 
-        imgLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ManagerActivity.class);
-                startActivity(intent);
-            }
-        });
-
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, new MapFragment());
