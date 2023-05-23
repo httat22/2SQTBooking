@@ -111,7 +111,7 @@ public class ReserveGolfActivity extends AppCompatActivity {
 
         userId = user.getUid();
         userName = user.getDisplayName();
-        nameType = "Resort Golf Courses Ticket";
+        nameType = "Golf";
         imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/golfs%2Fgolf2.jpg?alt=media&token=4c5170e1-d16b-47f7-b596-01ef862176f4";
         ticketId = "Golf" + userId + System.currentTimeMillis();
 

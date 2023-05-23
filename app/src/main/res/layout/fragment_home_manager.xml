@@ -77,11 +77,12 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/right_icons"
                         android:layout_marginBottom="10dp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Change Room List"
-                        android:textSize="33sp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="match_parent"
@@ -113,11 +114,12 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/right_icons"
                         android:layout_marginBottom="10dp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Reserving Room List"
-                        android:textSize="33sp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="match_parent"
@@ -149,11 +151,12 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/right_icons"
                         android:layout_marginBottom="10dp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Reserving User List"
-                        android:textSize="33sp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="match_parent"

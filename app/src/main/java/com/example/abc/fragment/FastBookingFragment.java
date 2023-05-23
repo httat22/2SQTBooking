@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.abc.R;
 import com.example.abc.models.InfoRoomBookedModel;
+import com.example.abc.models.ReserveUserModel;
 import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,7 @@ public class FastBookingFragment extends Fragment {
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
     private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
     private DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("Room");
+    private DatabaseReference reserveUserRef = FirebaseDatabase.getInstance().getReference("reserving_user");
     private String dateArrive, dateLeave;
     private List<String> listRangeTime;
     FirebaseUser user;
@@ -216,8 +218,9 @@ public class FastBookingFragment extends Fragment {
 
                 InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, dateArrive, dateLeave, numberPerson, currentTime, userId);
                 dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
+                ReserveUserModel reserveUserModel = new ReserveUserModel(userId, userName, user.getEmail(), "");
+                reserveUserRef.child(userId).setValue(reserveUserModel);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

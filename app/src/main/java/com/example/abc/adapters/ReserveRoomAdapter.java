@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,21 +18,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+public class ReserveRoomAdapter extends RecyclerView.Adapter<ReserveRoomAdapter.ViewHolder> {
 
-    FragmentActivity context;
+    Context context;
     List<TicketModel> list;
 
-    public NotificationAdapter() {
+    public ReserveRoomAdapter() {
     }
-    public NotificationAdapter(FragmentActivity context, List<TicketModel> list) {
+
+    public ReserveRoomAdapter(Context context, List<TicketModel> list) {
         this.context = context;
         this.list = list;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification_manager, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reserving_room, parent, false);
         return new ViewHolder(view);
     }
 
@@ -41,24 +42,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TicketModel ticketModel = list.get(position);
         if (ticketModel == null) return;
-        String s1;
-        if (ticketModel.getRoomId() != null) {
-            s1 = ticketModel.getUserName() + " has order room " + ticketModel.getRoomId() + " successfully";
-        } else {
-            s1 = ticketModel.getUserName() + " has order " + ticketModel.getNameType() + " successfully";
-        }
 
-        String s2 = "#ID: " + ticketModel.getUserId();
+        String s1 = "Room " +  ticketModel.getDescription();
+        String s2 = "Payment total: " + ticketModel.getPrice() + "$";
+        String s3 = "Renter: " + ticketModel.getUserName();
 
         long timeInMilliseconds = ticketModel.getDateBooked();
         Date date = new Date(timeInMilliseconds);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = " " + sdf.format(date);
 
-        holder.notification.setText(s1);
-        holder.idUser.setText(s2);
-        holder.timeBooked.setText(formattedDate);
-        Glide.with(context).load(ticketModel.getImageURL()).into(holder.imageNotification);
+        holder.tvRoomTitle.setText(s1);
+        holder.tvPrice.setText(s2);
+        holder.tvNameUser.setText(s3);
+        holder.tvTime.setText(formattedDate);
+        Glide.with(context).load(ticketModel.getImageURL()).into(holder.imageRoom);
     }
 
     @Override
@@ -69,14 +67,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView notification, idUser, timeBooked;
-        ImageView imageNotification;
+        ImageView imageRoom;
+        TextView tvRoomTitle, tvPrice, tvNameUser, tvTime;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            notification = itemView.findViewById(R.id.notification);
-            idUser = itemView.findViewById(R.id.idUser);
-            timeBooked = itemView.findViewById(R.id.timeBooked);
-            imageNotification = itemView.findViewById(R.id.imageNotification);
+            imageRoom = itemView.findViewById(R.id.imageRoom);
+            tvRoomTitle = itemView.findViewById(R.id.tvRoomTitle);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvNameUser = itemView.findViewById(R.id.tvNameUser);
+            tvTime = itemView.findViewById(R.id.tvTime);
         }
     }
 }

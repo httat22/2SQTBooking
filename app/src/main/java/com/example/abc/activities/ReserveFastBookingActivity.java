@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.abc.R;
 import com.example.abc.models.InfoRoomBookedModel;
+import com.example.abc.models.ReserveUserModel;
 import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,7 @@ public class ReserveFastBookingActivity extends AppCompatActivity {
     private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
     private final DatabaseReference roomRef = FirebaseDatabase.getInstance().getReference("Room");
     private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
+    private DatabaseReference reserveUserRef = FirebaseDatabase.getInstance().getReference("reserving_user");
 
     private List<String> listRangeTime;
     FirebaseUser user;
@@ -194,7 +196,7 @@ public class ReserveFastBookingActivity extends AppCompatActivity {
                 description = roomTypeModel.getRoom();
                 roomId = roomTypeModel.getRoomId();
                 TicketModel ticketModel = new TicketModel(userId, nameType, dateArrive, dateLeave, imageURL,
-                        price, numberPerson, ticketId, description, "checkIn", roomId, currentTime, "ha");
+                        price, numberPerson, ticketId, description, "checkIn", roomId, currentTime, userName);
                 userStayingRef.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
@@ -211,6 +213,8 @@ public class ReserveFastBookingActivity extends AppCompatActivity {
 
                 InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, dateArrive, dateLeave, numberPerson, currentTime, userId);
                 dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
+                ReserveUserModel reserveUserModel = new ReserveUserModel(userId, userName, user.getEmail(), "");
+                reserveUserRef.child(userId).setValue(reserveUserModel);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -2,45 +2,51 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ntt_home" />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imageNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ntt_home" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ha Trong Thuan has ordered room 201 successfully !"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:text="Ha Trong Thuan has ordered room 201 successfully !"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/idUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="#ID: 11111"/>
+                android:maxLength="20"
+                android:text="#ID: 11111" />
+
             <TextView
                 android:id="@+id/timeBooked"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text=" 23 minutes ago"
+                android:layout_weight="1"
                 android:drawableLeft="@drawable/blue_circle_dot"
-                android:layout_weight="1"/>
+                android:text=" 23 minutes ago" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

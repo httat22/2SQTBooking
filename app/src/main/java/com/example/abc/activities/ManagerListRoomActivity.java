@@ -1,5 +1,9 @@
 package com.example.abc.activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,19 +12,25 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.abc.R;
 import com.example.abc.adapters.RoomManagerAdapter;
 import com.example.abc.models.RoomTypeModel;
@@ -35,14 +45,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerListRoomActivity extends AppCompatActivity {
-
     private RecyclerView roomRecManager;
     private AppCompatButton btnAddRoom;
     private List<RoomTypeModel> roomTypeModelList;
     private RoomManagerAdapter roomManagerAdapter;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Room");
     private ShimmerFrameLayout shimmerFrameLayout;
-
     public ManagerListRoomActivity() {
     }
 
@@ -67,9 +75,12 @@ public class ManagerListRoomActivity extends AppCompatActivity {
         roomManagerAdapter = new RoomManagerAdapter(this, roomTypeModelList, new RoomManagerAdapter.IClickListener() {
             @Override
             public void onClickUpdateItem(RoomTypeModel roomTypeModel) {
-                openDialogUpdateItem(roomTypeModel);
+                Intent intent = new Intent(ManagerListRoomActivity.this, ManagerUpdateRoomActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("object_roomTypeModel", roomTypeModel);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
-
             @Override
             public void onClickDeleteItem(RoomTypeModel roomTypeModel) {
                 onClickDeleteData(roomTypeModel);
@@ -79,7 +90,8 @@ public class ManagerListRoomActivity extends AppCompatActivity {
         btnAddRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialogAddRoom();
+                Intent intent = new Intent(ManagerListRoomActivity.this, ManagerAddRoomActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -87,7 +99,6 @@ public class ManagerListRoomActivity extends AppCompatActivity {
 
         getRoomModelListFromRealTimeDatabase();
     }
-
     private void onClickDeleteData(RoomTypeModel roomTypeModel) {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.app_name))
@@ -106,106 +117,6 @@ public class ManagerListRoomActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", null)
                 .show();
     }
-
-    private void openDialogAddRoom() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.ntt_add_room_manager);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(true);
-
-        ImageView btnCancel;
-        EditText edtRoomName, edtPrice, edtDescription;
-        AppCompatButton btnUpdateRoom;
-
-        edtRoomName = dialog.findViewById(R.id.edtRoomName);
-        edtPrice = dialog.findViewById(R.id.edtPrice);
-        edtDescription = dialog.findViewById(R.id.edtDescription);
-        btnUpdateRoom = dialog.findViewById(R.id.btnUpdateRoom);
-        btnCancel = dialog.findViewById(R.id.btnCancel);
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        btnUpdateRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String roomName = edtRoomName.getText().toString().trim();
-                String description = edtDescription.getText().toString().trim();
-                String price = edtPrice.getText().toString().trim();
-                RoomTypeModel roomTypeModel = new RoomTypeModel();
-                roomTypeModel.setRoom(roomName);
-                roomTypeModel.setPrice(Integer.parseInt(price));
-                roomTypeModel.setDescription(description);
-                databaseReference.child(roomTypeModel.getRoomId()).updateChildren(roomTypeModel.toMap(), new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(ManagerListRoomActivity.this, "Add Room Successful!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
-        dialog.show();
-    }
-
-    private void openDialogUpdateItem(RoomTypeModel roomTypeModel) {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.ntt_add_room_manager);
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(true);
-
-        ImageView btnCancel;
-        EditText edtRoomName, edtPrice, edtDescription;
-        AppCompatButton btnUpdateRoom;
-
-        edtRoomName = dialog.findViewById(R.id.edtRoomName);
-        edtPrice = dialog.findViewById(R.id.edtPrice);
-        edtDescription = dialog.findViewById(R.id.edtDescription);
-        btnUpdateRoom = dialog.findViewById(R.id.btnUpdateRoom);
-        btnCancel = dialog.findViewById(R.id.btnCancel);
-
-//        Glide.with(this).load(roomTypeModel.getImageURL()).into(imageRoom);
-        edtRoomName.setText(roomTypeModel.getRoom());
-        edtPrice.setText(String.valueOf(roomTypeModel.getPrice()));
-        edtDescription.setText(roomTypeModel.getDescription());
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        btnUpdateRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String newRoomName = edtRoomName.getText().toString().trim();
-                String newDescription = edtDescription.getText().toString().trim();
-                String newPrice = edtPrice.getText().toString().trim();
-                roomTypeModel.setRoom(newRoomName);
-                roomTypeModel.setPrice(Integer.parseInt(newPrice));
-                roomTypeModel.setDescription(newDescription);
-                databaseReference.child(roomTypeModel.getRoomId()).updateChildren(roomTypeModel.toMap(), new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(ManagerListRoomActivity.this, "Update Successful!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
-
-        dialog.show();
-    }
-
     private void getRoomModelListFromRealTimeDatabase() {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override

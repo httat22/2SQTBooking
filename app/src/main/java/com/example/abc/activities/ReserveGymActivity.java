@@ -95,7 +95,7 @@ public class ReserveGymActivity extends AppCompatActivity {
 
         userId = user.getUid();
         userName = user.getDisplayName();
-        nameType = "Gym and Fitness Club Ticket";
+        nameType = "Gym and Fitness";
         imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/gyms%2Ffitness1.jpg?alt=media&token=f98e89dc-01d8-4eb1-8692-51be805c2604";
         ticketId = "Gym" + userId + System.currentTimeMillis();
 

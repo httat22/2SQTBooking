@@ -151,7 +151,7 @@ public class StatisticsFragment extends Fragment {
         infoRoomBookedRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                BarChartItem[] barChartItems = new BarChartItem[20];
+                BarChartItem[] barChartItems = new BarChartItem[100];
                 for (int i = 0; i < barChartItems.length; i++) {
                     barChartItems[i] = new BarChartItem();
                 }
@@ -247,7 +247,7 @@ public class StatisticsFragment extends Fragment {
         infoRoomBookedRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                BarChartItem[] barChartItems = new BarChartItem[20];
+                BarChartItem[] barChartItems = new BarChartItem[100];
                 for (int i = 0; i < barChartItems.length; i++) {
                     barChartItems[i] = new BarChartItem();
                 }
@@ -345,7 +345,7 @@ public class StatisticsFragment extends Fragment {
         infoRoomBookedRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                BarChartItem[] barChartItems = new BarChartItem[20];
+                BarChartItem[] barChartItems = new BarChartItem[100];
                 for (int i = 0; i < barChartItems.length; i++) {
                     barChartItems[i] = new BarChartItem();
                 }
@@ -436,7 +436,7 @@ public class StatisticsFragment extends Fragment {
                 BarChartItem barChartItem = list[i];
                 barEntriesList.add(new BarEntry(i, barChartItem.getHeight()));
             } else {
-                barEntriesList.add(new BarEntry(i, 5));
+                barEntriesList.add(new BarEntry(i, 0));
             }
         }
         setUpChart(list);

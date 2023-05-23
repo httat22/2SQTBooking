@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Abc"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ManagerUpdateRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ManagerAddRoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ManagerReservedRoomActivity"
             android:exported="false" />
         <activity

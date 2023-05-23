@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.abc.R;
 import com.example.abc.models.BookRoomModel;
 import com.example.abc.models.InfoRoomBookedModel;
+import com.example.abc.models.ReserveUserModel;
 import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,7 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
     private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
     private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
     private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
+    private DatabaseReference reserveUserRef = FirebaseDatabase.getInstance().getReference("reserving_user");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +135,8 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, bookRoomModel.getDateArrive(),
                 bookRoomModel.getDateLeave(), numberPerson, currentTime, userId);
         dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
+        ReserveUserModel reserveUserModel = new ReserveUserModel(userId, userName, user.getEmail(), "");
+        reserveUserRef.child(userId).setValue(reserveUserModel);
     }
 
     private void onClickAddTimeToRealTimeDatabase() {

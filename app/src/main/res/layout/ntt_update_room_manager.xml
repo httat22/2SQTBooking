@@ -4,33 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000000"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#00000000">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:padding="10dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp">
             <ImageView
-                android:id="@+id/btnCancelAdd"
+                android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_arrow_back_24"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView3"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="UPDATE ROOM"
+                android:text="ADD ROOM"
                 android:textColor="@color/primary_color"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -56,9 +58,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageRoom"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:scaleType="fitXY"
                         android:src="@color/shimmer_color" />
                     <TextView
                         android:id="@+id/tvChooseImage"
@@ -74,43 +77,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type Room:"
-                android:textSize="16sp"
-                android:layout_weight="0.5" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSingleRoom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Single Room"
-                    android:textColor="#4C4A4A"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorDefault"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnDoubleRoom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Double room"
-                    android:textColor="#4C4A4A"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/colorDefault"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -144,16 +112,14 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 app:boxBackgroundMode="none">
-
-                <EditText
+                <EditText android:layout_height="wrap_content"
                     android:id="@+id/edtPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ntt_input_text"
-                    android:backgroundTint="#F1F3FD"
-                    android:hint="Price / night"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:backgroundTint="#F1F3FD"
+                    android:background="@drawable/ntt_input_text"
+                    android:hint="Price / night" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -175,13 +141,13 @@
                 app:boxBackgroundMode="none">
                 <EditText
                     android:id="@+id/edtDescription"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ntt_input_text"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
                     android:backgroundTint="#F1F3FD"
                     android:hint="Details description"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:background="@drawable/ntt_input_text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -195,15 +161,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="60dp">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAddRoom"
+                android:id="@+id/btnUpdateRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/ntt_button_add_edit"
-                android:text="Add room"
+                android:text="Update room"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

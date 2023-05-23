@@ -42,19 +42,19 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         if (ticketModel == null) return;
 
         String s = ticketModel.getNumberPerson() + " Adult  -  " + ticketModel.getPrice() + "$";
-        String s2 = ticketModel.getNameType() + " - " + ticketModel.getDescription();
         String time = ticketModel.getDateArrive() + " - " + ticketModel.getDateLeave();
 
         holder.tvNumberAndPrice.setText(s);
-
         holder.tvTime.setText(time);
 //        if (ticketModel.getStatus().equals("checkIn")) {
 //            holder.imageStatus.setVisibility(View.VISIBLE);
 //        }
         if (!ticketModel.getNameType().equals("Booking Room")) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#E5EFCB"));
-            holder.tvDescription.setText(ticketModel.getNameType());
+            String s2 = "Ticket: " + ticketModel.getNameType();
+            holder.tvDescription.setText(s2);
         } else {
+            String s2 = ticketModel.getNameType() + " " + ticketModel.getDescription();
             holder.tvDescription.setText(s2);
         }
         Glide.with(context).load(list.get(position).getImageURL()).into(holder.imageItem);

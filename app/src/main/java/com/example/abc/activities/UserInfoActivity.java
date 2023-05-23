@@ -99,7 +99,6 @@ public class UserInfoActivity extends AppCompatActivity {
                     }
                 }
         );
-
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

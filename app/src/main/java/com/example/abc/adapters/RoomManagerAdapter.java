@@ -46,8 +46,9 @@ public class RoomManagerAdapter extends RecyclerView.Adapter<RoomManagerAdapter.
         if (roomTypeModel == null) return;
 
         String price = roomTypeModel.getPrice() + "$/night";
+        String room = "Room " + roomTypeModel.getRoom() + " - " + roomTypeModel.getRoomType();
         Glide.with(context).load(roomTypeModel.getImageURL()).into(holder.imageRoomItem);
-        holder.tvTypeRoom.setText(roomTypeModel.getRoom());
+        holder.tvTypeRoom.setText(room);
         holder.tvPrice.setText(price);
         holder.tvDescription.setText(roomTypeModel.getDescription());
 

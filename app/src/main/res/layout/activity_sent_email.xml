@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please enter email"
-            android:textColor="@color/red_color"
+            android:textColor="@color/red"
             android:visibility="gone"
             />
         <ProgressBar

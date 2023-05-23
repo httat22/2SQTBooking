@@ -95,7 +95,7 @@ public class ReserveTennisActivity extends AppCompatActivity {
 
         userId = user.getUid();
         userName = user.getDisplayName();
-        nameType = "Tennis Courses Club Ticket";
+        nameType = "Tennis";
         imageURL = "https://firebasestorage.googleapis.com/v0/b/sqtbooking-cc92e.appspot.com/o/tennis%2Ftennis2.jpg?alt=media&token=ea267312-95f2-46c6-98d3-fcf3fdd11c22";
         ticketId = "Tennis" + userId + System.currentTimeMillis();
 

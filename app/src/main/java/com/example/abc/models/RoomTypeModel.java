@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RoomTypeModel implements Serializable {
-    int numberRoomAvailable;
     String roomId, room, imageURL, description, roomType;
     int price;
 
@@ -64,14 +63,6 @@ public class RoomTypeModel implements Serializable {
         return price;
     }
 
-    public int getNumberRoomAvailable() {
-        return numberRoomAvailable;
-    }
-
-    public void setNumberRoomAvailable(int numberRoomAvailable) {
-        this.numberRoomAvailable = numberRoomAvailable;
-    }
-
     public String getRoomId() {
         return roomId;
     }
@@ -84,7 +75,6 @@ public class RoomTypeModel implements Serializable {
     public String toString() {
         return "RoomTypeModel{" +
                 "roomID=" + roomId +
-                ", numberRoomAvailable=" + numberRoomAvailable +
                 ", description='" + room + '\'' +
                 ", price='" + price + '\'' +
                 ", imageURL='" + imageURL + '\'' +
