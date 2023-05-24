@@ -20,6 +20,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -436,7 +437,7 @@ public class StatisticsFragment extends Fragment {
     private void setValueBarChart(BarChartItem[] list, int index) {
         Arrays.sort(list);
         barEntriesList.clear();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 6; i++) {
             if (i < index) {
                 BarChartItem barChartItem = list[i];
                 barEntriesList.add(new BarEntry(i, barChartItem.getHeight()));
@@ -460,7 +461,7 @@ public class StatisticsFragment extends Fragment {
         barDataSet.setColor(Color.parseColor("#799BF9"));
         barDataSet.setDrawValues(false);
         BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(0.5f);
+        barData.setBarWidth(0.7f);
         barChart.setData(barData);
         barChart.getLegend().setEnabled(false);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
