@@ -1,9 +1,25 @@
 package com.example.abc.models;
 
 public class UserModel {
-    String userId, userName, email, phone, address, salt;
-    int loginAttempts;
-    long lastFailedLoginTime;
+    private String userId, userName, email, phone, address, salt, imageURL;
+    private boolean isLogin;
+    private int loginAttempts;
+    private long lastFailedLoginTime;
+    public UserModel() {
+    }
+
+    public UserModel(String userId, String userName, String email, String phone, String address, String salt) {
+        this.userId = userId;
+        this.userName = userName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.salt = salt;
+        this.loginAttempts = 0;
+        this.lastFailedLoginTime = 0;
+        this.isLogin = false;
+        this.imageURL = "";
+    }
 
     public int getLoginAttempts() {
         return loginAttempts;
@@ -20,9 +36,6 @@ public class UserModel {
     public void setLastFailedLoginTime(long lastFailedLoginTime) {
         this.lastFailedLoginTime = lastFailedLoginTime;
     }
-
-    public UserModel() {}
-
     public String getUserId() {
         return userId;
     }
@@ -39,15 +52,20 @@ public class UserModel {
         this.salt = salt;
     }
 
-    public UserModel(String userId, String userName, String email, String phone, String address, String salt) {
-        this.userId = userId;
-        this.userName = userName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.salt = salt;
-        this.loginAttempts = 0;
-        this.lastFailedLoginTime = 0;
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public boolean getIsLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean isLogin) {
+        this.isLogin = isLogin;
     }
 
     public String getUserName() {

@@ -105,7 +105,9 @@ public class BookRoomDetailActivity extends AppCompatActivity{
         if (bundle == null) return;
         roomTypeModel = (RoomTypeModel) bundle.get("object_roomTypeModel");
         Glide.with(this).load(roomTypeModel.getImageURL()).into(imageRoom);
-        tvNameRoom.setText(roomTypeModel.getRoom());
+
+        String nameRoom = "Room " + roomTypeModel.getRoom();
+        tvNameRoom.setText(nameRoom);
         String stringPrice = roomTypeModel.getPrice() + "$";
         tvPrice.setText(stringPrice);
 

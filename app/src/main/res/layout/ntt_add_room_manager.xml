@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="UPDATE ROOM"
+                android:text="ADD ROOM"
                 android:textColor="@color/primary_color"
                 android:textSize="20sp"
                 android:textStyle="bold"

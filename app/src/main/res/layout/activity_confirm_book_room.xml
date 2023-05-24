@@ -201,7 +201,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:text="Room 301 - City Viewing with Vintage Space"
+            android:text="Room 301"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -218,7 +218,7 @@
             android:layout_marginEnd="68dp"
             android:text="$279 / night"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageRoomConfirm"
             app:layout_constraintTop_toBottomOf="@+id/tvNameRoom" />

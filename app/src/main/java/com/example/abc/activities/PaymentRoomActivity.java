@@ -27,7 +27,7 @@ public class PaymentRoomActivity extends AppCompatActivity {
     private BookRoomModel bookRoomModel;
     private ImageButton btnBack;
 
-    private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson;
+    private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson, tvDatePayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class PaymentRoomActivity extends AppCompatActivity {
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
         tvNumberPerson = findViewById(R.id.tvNumberPerson);
         btnBack = findViewById(R.id.btnBack);
+        tvDatePayment = findViewById(R.id.tvDatePayment);
 
         getDataFromConfirmBookRoom();
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +64,9 @@ public class PaymentRoomActivity extends AppCompatActivity {
         roomTypeModel = (RoomTypeModel) bundle.get("object_roomTypeModel");
         bookRoomModel = (BookRoomModel) bundle.get("object_bookRoomModel");
         Glide.with(this).load(roomTypeModel.getImageURL()).into(imageView);
-        tvNameRoom.setText(roomTypeModel.getRoom());
+
+        String nameRoom = "Room " + roomTypeModel.getRoom();
+        tvNameRoom.setText(nameRoom);
 
         String numberSingle = "2 Adults";
         String numberDouble = "4 Adults";
@@ -86,6 +89,13 @@ public class PaymentRoomActivity extends AppCompatActivity {
         } else {
             tvNumberPerson.setText(numberDouble);
         }
+
+
+        long timeInMilliseconds = System.currentTimeMillis();
+        Date date = new Date(timeInMilliseconds);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = "Date of payment: " + sdf.format(date);
+        tvDatePayment.setText(formattedDate);
     }
     public int getNumberOfDate(String start, String end) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

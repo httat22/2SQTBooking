@@ -41,7 +41,7 @@ public class ReserveGymActivity extends AppCompatActivity {
 
     private BookServiceModel bookServiceModel;
     private DatabaseReference databaseReference;
-    private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("time_gym_booked");
+    private final DatabaseReference timeRef = FirebaseDatabase.getInstance().getReference("service_booked");
     private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
 
     @Override
@@ -83,7 +83,7 @@ public class ReserveGymActivity extends AppCompatActivity {
     private void onClickAddRealtimeDatabase() {
         getBookServiceModel();
         databaseReference = FirebaseDatabase.getInstance().getReference("user_staying");
-        onClickAddTimeToRealTimeDatabase();
+//        onClickAddTimeToRealTimeDatabase();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             return;
@@ -111,16 +111,18 @@ public class ReserveGymActivity extends AppCompatActivity {
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
             }
         });
 
         listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        timeRef.child("gym").child(userId).push().setValue(bookServiceModel);
     }
 
     private void onClickAddTimeToRealTimeDatabase() {
@@ -168,99 +170,37 @@ public class ReserveGymActivity extends AppCompatActivity {
     }
 
     public void pickCheckInDateGym_click(View view) {
-        List<String> disableTime = new ArrayList<>();
-        timeRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot time: snapshot.getChildren()) {
-                    String s = time.getValue(String.class);
-                    disableTime.add(s);
-                }
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                        dateArrive = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        btnCheckIn.setText(dateArrive);
-                    }
-                }, year, month, day);
-                dpd.show(getSupportFragmentManager(), "DatePickerDialog");
-                dpd.setMinDate(calendar);
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//
-//                Date date = null;
-//                for (String time : disableTime) {
-//                    try {
-//                        date = sdf.parse(time);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    calendar = dateToCalendar(date);
-//
-//                    List<Calendar> dates = new ArrayList<>();
-//                    dates.add(calendar);
-//                    Calendar[] disabledDays1 = dates.toArray(new Calendar[dates.size()]);
-//                    dpd.setDisabledDays(disabledDays1);
-//                }
-            }
+        com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                dateArrive = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                btnCheckIn.setText(dateArrive);
             }
-        });
+        }, year, month, day);
+        dpd.show(getSupportFragmentManager(), "DatePickerDialog");
+        dpd.setMinDate(calendar);
     }
 
     public void pickCheckOutDateGym_click(View view) {
-        List<String> disableTime = new ArrayList<>();
-        timeRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot time: snapshot.getChildren()) {
-                    String s = time.getValue(String.class);
-                    disableTime.add(s);
-                }
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                        dateLeave = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        btnCheckOut.setText(dateLeave);
-                    }
-                }, year, month, day);
-                dpd.show(getSupportFragmentManager(), "DatePickerDialog");
-                dpd.setMinDate(calendar);
-//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//
-//                Date date = null;
-//                for (String time : disableTime) {
-//                    try {
-//                        date = sdf.parse(time);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    calendar = dateToCalendar(date);
-//
-//                    List<Calendar> dates = new ArrayList<>();
-//                    dates.add(calendar);
-//                    Calendar[] disabledDays1 = dates.toArray(new Calendar[dates.size()]);
-//                    dpd.setDisabledDays(disabledDays1);
-//                }
-            }
+        com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                dateLeave = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                btnCheckOut.setText(dateLeave);
             }
-        });
+        }, year, month, day);
+        dpd.show(getSupportFragmentManager(), "DatePickerDialog");
+        dpd.setMinDate(calendar);
     }
     @NonNull
     private Calendar dateToCalendar(Date date) {

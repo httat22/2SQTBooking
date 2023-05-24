@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.abc.R;
 import com.example.abc.models.ReserveUserModel;
 import com.example.abc.models.UserModel;
@@ -41,6 +42,7 @@ public class ReserveUserAdapter extends RecyclerView.Adapter<ReserveUserAdapter.
         if (userModel == null) return;
         holder.tvName.setText(userModel.getName());
         holder.tvEmail.setText(userModel.getEmail());
+//        Glide.with(context).load(userModel.getImage()).into(holder.imageUser);
     }
 
     @Override

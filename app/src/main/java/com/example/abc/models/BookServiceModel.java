@@ -1,6 +1,10 @@
 package com.example.abc.models;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookServiceModel implements Serializable {
     int totalPayment;
@@ -14,19 +18,6 @@ public class BookServiceModel implements Serializable {
 
     public BookServiceModel() {
     }
-
-    @Override
-    public String toString() {
-        return "BookServiceModel{" +
-                "totalPayment=" + totalPayment +
-                ", price=" + price +
-                ", numberPerson=" + numberPerson +
-                ", userId='" + userId + '\'' +
-                ", dateArrive='" + dateArrive + '\'' +
-                ", dateLeave='" + dateLeave + '\'' +
-                '}';
-    }
-
     public int getTotalPayment() {
         return totalPayment;
     }
@@ -72,7 +63,7 @@ public class BookServiceModel implements Serializable {
     }
 
     public BookServiceModel(int price, int numberPerson, String userId, String dateArrive, String dateLeave) {
-        this.price = 25;
+        this.price = price;
         this.numberPerson = numberPerson;
         this.userId = userId;
         this.dateArrive = dateArrive;

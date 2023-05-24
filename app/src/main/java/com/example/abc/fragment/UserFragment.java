@@ -129,6 +129,9 @@ public class UserFragment extends Fragment {
                 myDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        assert user != null;
+                        databaseReference.child(user.getUid()).child("isLogin").setValue(false);
                         FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);

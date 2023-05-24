@@ -43,7 +43,8 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.ViewHo
 
         String price = roomTypeModel.getPrice() + "$/night";
         Glide.with(context).load(roomTypeModel.getImageURL()).into(holder.imageView);
-        holder.tvTypeRoom.setText(roomTypeModel.getRoom());
+        String nameRoom = "Room " + roomTypeModel.getRoom() + " - " + roomTypeModel.getRoomType();
+        holder.tvTypeRoom.setText(nameRoom);
         holder.tvPrice.setText(price);
         holder.tvDescription.setText(roomTypeModel.getDescription());
 

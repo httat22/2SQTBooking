@@ -88,7 +88,7 @@ public class ManagerUpdateRoomActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ManagerUpdateRoomActivity.super.onBackPressed();
             }
         });
         btnUpdateRoom.setOnClickListener(new View.OnClickListener() {

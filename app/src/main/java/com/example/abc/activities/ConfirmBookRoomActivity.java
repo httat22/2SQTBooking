@@ -46,6 +46,7 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
     private final DatabaseReference dateBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
     private DatabaseReference listStayingRef = FirebaseDatabase.getInstance().getReference("list_staying");
     private DatabaseReference reserveUserRef = FirebaseDatabase.getInstance().getReference("reserving_user");
+    private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,20 +122,21 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         databaseReference.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
             }
         });
 
         listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
             }
         });
 
         InfoRoomBookedModel infoRoomBookedModel = new InfoRoomBookedModel(roomId, bookRoomModel.getDateArrive(),
                 bookRoomModel.getDateLeave(), numberPerson, currentTime, userId);
         dateBookedRef.child(roomId).push().setValue(infoRoomBookedModel);
+
         ReserveUserModel reserveUserModel = new ReserveUserModel(userId, userName, user.getEmail(), "");
         reserveUserRef.child(userId).setValue(reserveUserModel);
     }
@@ -177,7 +179,9 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         roomTypeModel = (RoomTypeModel) bundle.get("object_roomTypeModel");
         bookRoomModel = (BookRoomModel) bundle.get("object_bookRoomModel");
         Glide.with(this).load(roomTypeModel.getImageURL()).into(imageView);
-        tvNameRoom.setText(roomTypeModel.getRoom());
+
+        String nameRoom = "Room " + roomTypeModel.getRoom();
+        tvNameRoom.setText(nameRoom);
 
         String numberSingle = "2 Adults";
         String numberDouble = "4 Adults";

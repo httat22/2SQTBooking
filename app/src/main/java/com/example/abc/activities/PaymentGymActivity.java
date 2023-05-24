@@ -24,7 +24,7 @@ public class PaymentGymActivity extends AppCompatActivity {
     private ImageView imgBackHome;
     private ImageButton btnBack;
 
-    private TextView tvNameTicket, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult,tvPriceTotal;
+    private TextView tvNameTicket, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult,tvPriceTotal, tvDatePayment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class PaymentGymActivity extends AppCompatActivity {
         tvPriceResult = findViewById(R.id.tvPriceResult);
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
         btnBack = findViewById(R.id.btnBack);
+        tvDatePayment = findViewById(R.id.tvDatePayment);
 
         getDataFromReserveGymActivity();
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,13 @@ public class PaymentGymActivity extends AppCompatActivity {
         tvPriceMul.setText(stringPriceMul);
         tvPriceResult.setText(stringPriceResult);
         tvPriceTotal.setText(stringPriceResult);
+
+        long timeInMilliseconds = System.currentTimeMillis();
+        Date date = new Date(timeInMilliseconds);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = "Date of payment: " + sdf.format(date);
+        tvDatePayment.setText(formattedDate);
+
     }
 
     private int getNumberOfDate(String start, String end) {

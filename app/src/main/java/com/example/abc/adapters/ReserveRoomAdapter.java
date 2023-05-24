@@ -1,6 +1,8 @@
 package com.example.abc.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
+import com.example.abc.activities.BookRoomDetailActivity;
+import com.example.abc.activities.ManagerDetailReservedRoomActivity;
+import com.example.abc.activities.ManagerReservedRoomActivity;
+import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 
 import java.text.SimpleDateFormat;
@@ -57,6 +63,20 @@ public class ReserveRoomAdapter extends RecyclerView.Adapter<ReserveRoomAdapter.
         holder.tvNameUser.setText(s3);
         holder.tvTime.setText(formattedDate);
         Glide.with(context).load(ticketModel.getImageURL()).into(holder.imageRoom);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCLickGoToDetail(ticketModel);
+            }
+        });
+    }
+
+    private void onCLickGoToDetail(TicketModel ticketModel) {
+        Intent intent = new Intent(context, ManagerDetailReservedRoomActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_ticketModel", ticketModel);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override

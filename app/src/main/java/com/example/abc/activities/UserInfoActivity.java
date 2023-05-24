@@ -9,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
+import com.example.abc.models.RoomTypeModel;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,12 +32,16 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class UserInfoActivity extends AppCompatActivity {
     private AppCompatButton btnUpdate;
     private EditText edtUserName, edtUserAddress, edtUserEmail, edtUserPhone;
     private ImageView userImage;
     private Uri imageUri;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference("users");
     private DatabaseReference databaseReference;
 
     private ProgressBar progressBar;
@@ -81,6 +89,40 @@ public class UserInfoActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        if (imageUri != null) {
+            StorageReference fileRef = storageReference.child(uid).child(uid +
+                    "." + getFileExtension(imageUri));
+
+            UploadTask uploadTask = fileRef.putFile(imageUri);
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return fileRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        databaseReference.child(uid).child("imageURL").setValue(downloadUri.toString());
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(UserInfoActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private void selectImageFromGallery() {

@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +47,7 @@ import java.util.List;
 public class StatisticsFragment extends Fragment {
 
     private TextView tvMaintenanceValue, tvAvailableValue, tvOccupiedValue, tvWeekCurrent,
-            tvTotalCheckOut, tvTotalCheckIn, tvWMY, tvNewBooking;
+            tvTotalCheckOut, tvTotalCheckIn, tvWMY, tvNewBooking, tvSourceBooking;
     private AppCompatRadioButton rdWeekly, rdMonthly, rdYearly;
     private PieChart pieChart;
     private BarChart barChart;
@@ -71,6 +72,7 @@ public class StatisticsFragment extends Fragment {
         tvTotalCheckOut = view.findViewById(R.id.tvTotalCheckOut);
         tvWMY = view.findViewById(R.id.tvWMY);
         tvNewBooking = view.findViewById(R.id.tvNewBooking);
+        tvSourceBooking = view.findViewById(R.id.tvSourceBooking);
 
         barEntriesList = new ArrayList<>();
         statisticsWeek();
@@ -193,6 +195,7 @@ public class StatisticsFragment extends Fragment {
                 tvTotalCheckIn.setText(String.valueOf(totalCheckIn));
                 tvTotalCheckOut.setText(String.valueOf(totalCheckOut));
                 tvNewBooking.setText(String.valueOf(totalCheckIn));
+                tvSourceBooking.setText(String.valueOf(totalCheckIn));
                 setValueBarChart(barChartItems, index);
             }
 
@@ -289,6 +292,7 @@ public class StatisticsFragment extends Fragment {
                 tvTotalCheckIn.setText(String.valueOf(totalCheckIn));
                 tvTotalCheckOut.setText(String.valueOf(totalCheckOut));
                 tvNewBooking.setText(String.valueOf(totalCheckIn));
+                tvSourceBooking.setText(String.valueOf(totalCheckIn));
                 setValueBarChart(barChartItems, index);
             }
 
@@ -387,6 +391,7 @@ public class StatisticsFragment extends Fragment {
                 tvTotalCheckIn.setText(String.valueOf(totalCheckIn));
                 tvTotalCheckOut.setText(String.valueOf(totalCheckOut));
                 tvNewBooking.setText(String.valueOf(totalCheckIn));
+                tvSourceBooking.setText(String.valueOf(totalCheckIn));
                 setValueBarChart(barChartItems, index);
             }
 
@@ -439,6 +444,15 @@ public class StatisticsFragment extends Fragment {
                 barEntriesList.add(new BarEntry(i, 0));
             }
         }
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return list[(int) value].getRoomId();
+            }
+        });
+
         setUpChart(list);
     }
     private void setUpChart(BarChartItem[] list) {
@@ -458,14 +472,6 @@ public class StatisticsFragment extends Fragment {
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisRight().setEnabled(false);
         barChart.setDrawGridBackground(false);
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                return list[(int) value].getRoomId();
-            }
-        });
 
         barChart.invalidate();
     }

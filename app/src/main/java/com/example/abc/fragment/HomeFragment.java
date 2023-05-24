@@ -23,8 +23,8 @@ import com.example.abc.activities.RoomTypeListActivity;
 import com.example.abc.activities.ReserveTennisActivity;
 
 public class HomeFragment extends Fragment {
-    CardView cvFastBooking, cvGym, cvTennis, cvRoomReserve, cvGolf;
-    ImageView imgLogo;
+    private CardView cvFastBooking, cvGym, cvTennis, cvRoomReserve, cvGolf;
+    private ImageView imgLogo;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);

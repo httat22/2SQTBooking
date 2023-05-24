@@ -87,7 +87,7 @@ public class ManagerAddRoomActivity extends AppCompatActivity {
         btnCancelAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ManagerAddRoomActivity.super.onBackPressed();
             }
         });
         btnAddRoom.setOnClickListener(new View.OnClickListener() {

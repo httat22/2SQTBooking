@@ -25,16 +25,13 @@ public class PaymentGolfActivity extends AppCompatActivity {
 
     private ImageView imgBackHome;
     private ImageButton btnBack;
-    private TextView tvNameTicket, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult,tvPriceTotal;
+    private TextView tvNameTicket, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvDatePayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_golf);
         getSupportActionBar().hide();
-
-        Locale locale = getResources().getConfiguration().locale;
-        Log.e("country", locale.getCountry());
 
         imgBackHome = findViewById(R.id.imgBackHome);
         tvNameTicket = findViewById(R.id.tvNameTicket);
@@ -44,6 +41,7 @@ public class PaymentGolfActivity extends AppCompatActivity {
         tvPriceResult = findViewById(R.id.tvPriceResult);
         tvPriceTotal = findViewById(R.id.tvPriceTotal);
         btnBack = findViewById(R.id.btnBack);
+        tvDatePayment = findViewById(R.id.tvDatePayment);
 
         getDataFromReserveGymActivity();
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +73,12 @@ public class PaymentGolfActivity extends AppCompatActivity {
         tvPriceMul.setText(stringPriceMul);
         tvPriceResult.setText(stringPriceResult);
         tvPriceTotal.setText(stringPriceResult);
+        long timeInMilliseconds = System.currentTimeMillis();
+        Date date = new Date(timeInMilliseconds);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = "Date of payment: " + sdf.format(date);
+        tvDatePayment.setText(formattedDate);
+
     }
     private int getNumberOfDate(String start, String end) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

@@ -205,14 +205,14 @@ public class FastBookingFragment extends Fragment {
                 userStayingRef.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Booking successful!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Booking successful!", Toast.LENGTH_SHORT).show();
                     }
                 });
 

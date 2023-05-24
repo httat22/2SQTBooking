@@ -65,7 +65,7 @@ public class MyStayingFragment extends Fragment {
         }
 
         String userID = user.getUid();
-        databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(userID).orderByChild("dateBooked").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 shimmerFrameLayout.stopShimmer();
@@ -76,7 +76,7 @@ public class MyStayingFragment extends Fragment {
                 }
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     TicketModel ticketModel = (TicketModel) dataSnapshot.getValue(TicketModel.class);
-                    list.add(ticketModel);
+                    list.add(0, ticketModel);
                 }
                 if (list.size() == 0) {
                     imgEmptyCart.setVisibility(View.VISIBLE);

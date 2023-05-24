@@ -1,6 +1,8 @@
 package com.example.abc.models;
 
-public class TicketModel {
+import java.io.Serializable;
+
+public class TicketModel implements Serializable {
     int price, numberPerson;
     String userId, nameType, dateArrive, dateLeave, imageURL, ticketId, description, status, roomId, userName;
 

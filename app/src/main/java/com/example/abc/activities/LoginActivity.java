@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     FirebaseUser user = mAuth.getCurrentUser();
                                                     if (user != null) {
                                                         if (user.isEmailVerified()) {
+                                                            userRef.child(userId).child("isLogin").setValue(true);
                                                             userRef.child(userId).child("lastFailedLoginTime")
                                                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                                                         @Override
@@ -187,8 +189,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                                             Toast.makeText(getApplication(), "You entered the wrong password beyond the allowed limit, please wait 10 minutes to continue.", Toast.LENGTH_SHORT).show();
                                                                                         } else {
                                                                                             // Hiển thị thông báo cho người dùng về số lần đăng nhập sai còn lại.
-                                                                                            Toast.makeText(LoginActivity.this, "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
-                                                                                            String message = "You have " + (MAX_LOGIN_ATTEMPTS - loginAttempts) + " more password attempts";
+                                                                                            String message = "Email or password is incorrect! You have " + (MAX_LOGIN_ATTEMPTS - loginAttempts) + " more password attempts";
                                                                                             Toast.makeText(getApplication(), message, Toast.LENGTH_SHORT).show();
                                                                                         }
                                                                                     }

@@ -200,14 +200,14 @@ public class ReserveFastBookingActivity extends AppCompatActivity {
                 userStayingRef.child(userId).child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 listStayingRef.child(ticketId).setValue(ticketModel, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(getApplication(), "Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "Booking successful!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
