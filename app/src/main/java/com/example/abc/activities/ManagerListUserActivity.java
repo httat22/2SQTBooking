@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.abc.R;
 import com.example.abc.adapters.ReserveUserAdapter;
@@ -27,10 +28,13 @@ import java.util.List;
 public class ManagerListUserActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<ReserveUserModel> list;
+    private List<UserModel> list;
     private ReserveUserAdapter reserveUserAdapter;
     private ShimmerFrameLayout shimmerFrameLayout;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("reserving_user");
+    private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
+    private DatabaseReference userStayingRef = FirebaseDatabase.getInstance().getReference("user_staying");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,19 +53,18 @@ public class ManagerListUserActivity extends AppCompatActivity {
         reserveUserAdapter = new ReserveUserAdapter(this, list);
         recyclerView.setAdapter(reserveUserAdapter);
     }
+
     private void getDataFromRealTimeDatabase() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                if (list != null) {
-                    list.clear();
-                }
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    ReserveUserModel reserveUserModel = (ReserveUserModel) dataSnapshot.getValue(ReserveUserModel.class);
-                    list.add(reserveUserModel);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                    list.add(userModel);
                 }
                 reserveUserAdapter.notifyDataSetChanged();
             }

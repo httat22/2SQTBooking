@@ -1,6 +1,8 @@
 package com.example.abc.models;
 
-public class ReserveUserModel {
+import java.io.Serializable;
+
+public class ReserveUserModel implements Serializable {
     private String userId;
     private String name;
     private String email;

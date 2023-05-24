@@ -217,7 +217,6 @@ public class ConfirmBookRoomActivity extends AppCompatActivity {
         }
         long differenceInMilliseconds = endDate.getTime() - startDate.getTime();
         long differenceInDays = TimeUnit.MILLISECONDS.toDays(differenceInMilliseconds);
-
         return (int) differenceInDays;
     }
 

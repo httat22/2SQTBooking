@@ -1,6 +1,8 @@
 package com.example.abc.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
+import com.example.abc.activities.BookRoomDetailActivity;
+import com.example.abc.activities.ManagerDetailUserActivity;
 import com.example.abc.models.ReserveUserModel;
+import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.UserModel;
 
 import java.util.List;
 
 public class ReserveUserAdapter extends RecyclerView.Adapter<ReserveUserAdapter.ViewHolder> {
     Context context;
-    List<ReserveUserModel> list;
+    List<UserModel> list;
 
     public ReserveUserAdapter() {
     }
 
-    public ReserveUserAdapter(Context context, List<ReserveUserModel> list) {
+    public ReserveUserAdapter(Context context, List<UserModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -38,11 +43,27 @@ public class ReserveUserAdapter extends RecyclerView.Adapter<ReserveUserAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ReserveUserModel userModel = list.get(position);
+        UserModel userModel = list.get(position);
         if (userModel == null) return;
-        holder.tvName.setText(userModel.getName());
+        holder.tvName.setText(userModel.getUserName());
         holder.tvEmail.setText(userModel.getEmail());
-//        Glide.with(context).load(userModel.getImage()).into(holder.imageUser);
+        if (!userModel.getImageURL().equals("")) {
+            Glide.with(context).load(userModel.getImageURL()).into(holder.imageUser);
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickGoToDetail(userModel);
+            }
+        });
+    }
+
+    private void onClickGoToDetail(UserModel userModel) {
+        Intent intent = new Intent(context, ManagerDetailUserActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_userModel", userModel);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override
@@ -55,6 +76,7 @@ public class ReserveUserAdapter extends RecyclerView.Adapter<ReserveUserAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageUser;
         TextView tvName, tvEmail;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageUser = itemView.findViewById(R.id.imageUser);

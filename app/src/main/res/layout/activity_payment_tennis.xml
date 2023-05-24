@@ -199,8 +199,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo2"
-            tools:srcCompat="@drawable/logo2" />
+            app:srcCompat="@drawable/logo3"
+            tools:srcCompat="@drawable/logo3" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imagegym"

@@ -1,6 +1,8 @@
 package com.example.abc.models;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
     private String userId, userName, email, phone, address, salt, imageURL;
     private boolean isLogin;
     private int loginAttempts;

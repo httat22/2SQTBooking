@@ -42,7 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class UserFragment extends Fragment {
 
     private FragmentUserBinding binding;
-    private TextView tvUserInfo, tvPayment, tvDeleteAccount, tvLogOut;
+    private TextView tvUserInfo, tvDeleteAccount, tvLogOut;
     private DatabaseReference databaseReference;
     private ProgressBar progressBar;
 
@@ -155,7 +155,6 @@ public class UserFragment extends Fragment {
     public void initUI(View view) {
         progressBar = view.findViewById(R.id.progressBar);
         tvUserInfo = view.findViewById(R.id.tvUserInfo);
-        tvPayment = view.findViewById(R.id.tvPayment);
         tvDeleteAccount = view.findViewById(R.id.tvDeleteAccount);
         tvLogOut = view.findViewById(R.id.tvLogOut);
     }
