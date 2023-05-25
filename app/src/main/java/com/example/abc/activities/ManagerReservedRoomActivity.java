@@ -20,7 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ManagerReservedRoomActivity extends AppCompatActivity {
@@ -62,8 +66,20 @@ public class ManagerReservedRoomActivity extends AppCompatActivity {
                 }
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     TicketModel ticketModel = (TicketModel) dataSnapshot.getValue(TicketModel.class);
-                    if (ticketModel.getNameType().equals("Booking Room")) {
-                        list.add(0, ticketModel);
+                    if (ticketModel != null) {
+                        String dateLeave = ticketModel.getDateLeave();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                        try {
+                            Date date = dateFormat.parse(dateLeave);
+                            Calendar currentCalendar = Calendar.getInstance();
+                            Date currentDate = currentCalendar.getTime();
+                            if (date.compareTo(currentDate) > 0 && ticketModel.getNameType().equals("Booking Room")) {
+                                list.add(0, ticketModel);
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 reserveRoomAdapter.notifyDataSetChanged();

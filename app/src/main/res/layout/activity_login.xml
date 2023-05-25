@@ -99,40 +99,40 @@
             android:layout_height="wrap_content"
             android:visibility="gone"/>
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/llForgotPassword"-->
-<!--            android:layout_marginVertical="15dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/forgot_password"-->
-<!--                android:textColor="@color/color_button"/>-->
+        <LinearLayout
+            android:id="@+id/llForgotPassword"
+            android:layout_marginVertical="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_password"
+                android:textColor="@color/color_button"/>
 
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/llSignUp"-->
-<!--            android:layout_marginBottom="15dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/you_don_t_have_an_account"/>-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="4dp"-->
-<!--                android:textColor="@color/color_button"-->
-<!--                android:text="@string/sign_up"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llSignUp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_don_t_have_an_account"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/color_button"
+                android:text="@string/sign_up"/>
 
-<!--        </LinearLayout>-->
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
