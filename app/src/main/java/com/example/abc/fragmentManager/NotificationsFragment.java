@@ -76,7 +76,7 @@ public class NotificationsFragment extends Fragment {
                             Date date = dateFormat.parse(dateLeave);
                             Calendar currentCalendar = Calendar.getInstance();
                             Date currentDate = currentCalendar.getTime();
-                            if (date.compareTo(currentDate) > 0 && ticketModel.getNameType().equals("Booking Room")) {
+                            if (date.compareTo(currentDate) > 0) {
                                 list.add(0, ticketModel);
                             }
                         } catch (ParseException e) {
