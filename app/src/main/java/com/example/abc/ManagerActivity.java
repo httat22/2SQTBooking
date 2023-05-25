@@ -19,6 +19,8 @@ public class ManagerActivity extends AppCompatActivity {
 
     private ActivityManagerBinding binding;
     private String email = "";
+    private long backPressedTime;
+    private Toast mToast;
 
     public String getEmail() {
         return email;
@@ -47,12 +49,22 @@ public class ManagerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             email = intent.getStringExtra("email");
-
             Bundle bundle = new Bundle();
             bundle.putString("email", email);
-
             AccountFragment fragment = new AccountFragment();
             fragment.setArguments(bundle);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            mToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            mToast = Toast.makeText(ManagerActivity.this, "Press back again to exit the application", Toast.LENGTH_SHORT);
+            mToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }
