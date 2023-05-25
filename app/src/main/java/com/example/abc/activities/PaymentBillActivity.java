@@ -1,5 +1,7 @@
 package com.example.abc.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,32 +9,33 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.example.abc.MainActivity;
 import com.example.abc.R;
 import com.example.abc.models.BookRoomModel;
 import com.example.abc.models.RoomTypeModel;
+import com.example.abc.models.TicketModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class PaymentRoomActivity extends AppCompatActivity {
+public class PaymentBillActivity extends AppCompatActivity {
 
     private ImageView imageLogo, imageView;
-    private RoomTypeModel roomTypeModel;
-    private BookRoomModel bookRoomModel;
+    private TicketModel ticketModel;
     private ImageButton btnBack;
 
     private TextView tvNameRoom, tvPrice, tvRangeDate, tvPriceMul, tvPriceResult, tvPriceTotal, tvNumberPerson, tvDatePayment;
 
+    public PaymentBillActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_room);
+        setContentView(R.layout.activity_payment_bill);
         getSupportActionBar().hide();
 
         imageLogo = findViewById(R.id.imageLogo);
@@ -51,34 +54,42 @@ public class PaymentRoomActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaymentRoomActivity.this, MainActivity.class);
-                startActivity(intent);
-                finishAffinity();
+                PaymentBillActivity.super.onBackPressed();
             }
         });
+
     }
 
     private void getDataFromConfirmBookRoom() {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
-        roomTypeModel = (RoomTypeModel) bundle.get("object_roomTypeModel");
-        bookRoomModel = (BookRoomModel) bundle.get("object_bookRoomModel");
-        Glide.with(this).load(roomTypeModel.getImageURL()).into(imageView);
+        ticketModel = (TicketModel) bundle.get("object_ticketModel");
+        Glide.with(this).load(ticketModel.getImageURL()).into(imageView);
 
-        String nameRoom = "Room " + roomTypeModel.getRoom();
+        String nameRoom;
+        String numberPerson;
+
+        int numOfDate = getNumberOfDate(ticketModel.getDateArrive(), ticketModel.getDateLeave());
+
+        String stringPrice;
+        String stringTime = ticketModel.getDateArrive() + " - " + ticketModel.getDateLeave();
+
+        String stringPriceMul;
+        if (ticketModel.getNameType().equals("Booking Room")) {
+            nameRoom = "Room " + ticketModel.getDescription();
+            numberPerson = ticketModel.getNumberPerson() + " Adults";
+            stringPrice = "$" + ticketModel.getPrice()/numOfDate + "/night";
+            stringPriceMul = "$" + ticketModel.getPrice()/numOfDate + " x " + numOfDate + " nights";
+        } else {
+            nameRoom = "Ticket " + ticketModel.getNameType();
+            numberPerson = "1 Adult";
+            stringPrice = "$" + ticketModel.getPrice()/numOfDate + "/day";
+            stringPriceMul = "$" + ticketModel.getPrice()/numOfDate + " x " + numOfDate + " days x 1 people";
+        }
+
         tvNameRoom.setText(nameRoom);
-
-        String numberSingle = "2 Adults";
-        String numberDouble = "4 Adults";
-
-        String stringPrice = "$" + roomTypeModel.getPrice() + "/night";
-        String stringTime = bookRoomModel.getDateArrive() + " - " + bookRoomModel.getDateLeave();
-        int numOfDate = getNumberOfDate(bookRoomModel.getDateArrive(), bookRoomModel.getDateLeave());
-        String stringPriceMul = "$" + roomTypeModel.getPrice() + " x " + numOfDate + " /night";
-        int priceResult = roomTypeModel.getPrice()*numOfDate;
-        bookRoomModel.setTotalPayment(priceResult);
-        String stringPriceResult = "$" + priceResult;
-
+        tvNumberPerson.setText(numberPerson);
+        String stringPriceResult = "$" + ticketModel.getPrice();
 
         tvPrice.setText(stringPrice);
         tvRangeDate.setText(stringTime);
@@ -86,14 +97,8 @@ public class PaymentRoomActivity extends AppCompatActivity {
         tvPriceResult.setText(stringPriceResult);
         tvPriceTotal.setText(stringPriceResult);
 
-        if (roomTypeModel.getRoomType().equals("single")) {
-            tvNumberPerson.setText(numberSingle);
-        } else {
-            tvNumberPerson.setText(numberDouble);
-        }
 
-
-        long timeInMilliseconds = System.currentTimeMillis();
+        long timeInMilliseconds = ticketModel.getDateBooked();
         Date date = new Date(timeInMilliseconds);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = "Date of payment: " + sdf.format(date);

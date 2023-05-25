@@ -101,14 +101,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.length() > 0 && password.length() > 0) {
             if (isRegistrationClickable) {
-                if ((email.equals("admin1@gmail.com") && password.equals("admin1@com")) ||
-                        (email.equals("admin2@gmail.com") && password.equals("admin2@com")) ||
-                        (email.equals("admin3@gmail.com") && password.equals("admin3@com"))) {
-                    Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
-                    intent.putExtra("email", email);
-                    startActivity(intent);
-                    finishAffinity();
-                } else {
                     userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -215,7 +207,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                }
             }
         } else {
             if (email.length() == 0) {

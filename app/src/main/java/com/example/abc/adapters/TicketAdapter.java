@@ -1,6 +1,8 @@
 package com.example.abc.adapters;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.abc.R;
+import com.example.abc.activities.BookRoomDetailActivity;
+import com.example.abc.activities.PaymentBillActivity;
+import com.example.abc.activities.PaymentRoomActivity;
+import com.example.abc.models.RoomTypeModel;
 import com.example.abc.models.TicketModel;
 
 import java.util.List;
@@ -58,6 +64,20 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
             holder.tvDescription.setText(s2);
         }
         Glide.with(context).load(list.get(position).getImageURL()).into(holder.imageItem);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCLickGoToDetail(ticketModel);
+            }
+        });
+    }
+
+    private void onCLickGoToDetail(TicketModel ticketModel) {
+        Intent intent = new Intent(context, PaymentBillActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_ticketModel", ticketModel);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override
