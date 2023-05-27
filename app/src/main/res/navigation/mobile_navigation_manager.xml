@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home_manager"
-        android:name="com.example.abc.fragmentManager.HomeManagerFragment"
+        android:name="com.example.abcd.fragmentManager.HomeManagerFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home_manager"/>
 
     <fragment
         android:id="@+id/navigation_statistics"
-        android:name="com.example.abc.fragmentManager.StatisticsFragment"
+        android:name="com.example.abcd.fragmentManager.StatisticsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.abc.fragmentManager.NotificationsFragment"
+        android:name="com.example.abcd.fragmentManager.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.abc.fragmentManager.AccountFragment"
+        android:name="com.example.abcd.fragmentManager.AccountFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

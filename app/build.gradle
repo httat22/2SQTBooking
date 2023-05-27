@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.abc'
+    namespace 'com.example.abcd'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.abc"
+        applicationId "com.example.abcd"
         // hỗ trợ thiết bị chạy android từ phiên bản 7.0 (Nougat) (94,4% device)
         minSdk 24
         targetSdk 33
