@@ -56,12 +56,19 @@ public class StatisticsFragment extends Fragment {
     private AppCompatRadioButton rdWeekly, rdMonthly, rdYearly, rdAny;
     private AppCompatButton btnApply;
     private String stringDateStart, stringDateEnd;
+    private LinearLayout llCurrentTime;
     private PieChart pieChart;
     private BarChart barChart;
     private CardView cvPickDate;
     private ArrayList<BarEntry> barEntriesList;
     private DatabaseReference timeRoomBookedRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
     private DatabaseReference infoRoomBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        rdWeekly.setChecked(true);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +94,7 @@ public class StatisticsFragment extends Fragment {
         btnApply = view.findViewById(R.id.btnApply);
         tvPickDateStart = view.findViewById(R.id.tvPickDateStart);
         tvPickDateEnd = view.findViewById(R.id.tvPickDateEnd);
-
+        llCurrentTime = view.findViewById(R.id.llCurrentTime);
 
         barEntriesList = new ArrayList<>();
         statisticsWeek();
@@ -95,6 +102,7 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cvPickDate.setVisibility(View.GONE);
+                llCurrentTime.setVisibility(View.VISIBLE);
                 onClickStatisticsByWeek();
             }
         });
@@ -102,6 +110,7 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cvPickDate.setVisibility(View.GONE);
+                llCurrentTime.setVisibility(View.VISIBLE);
                 onClickStatisticsByMonth();
             }
         });
@@ -109,6 +118,7 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cvPickDate.setVisibility(View.GONE);
+                llCurrentTime.setVisibility(View.VISIBLE);
                 onClickStatisticsByYear();
             }
         });
@@ -116,6 +126,7 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cvPickDate.setVisibility(View.VISIBLE);
+                llCurrentTime.setVisibility(View.GONE);
                 onClickStatisticsAny();
             }
         });
@@ -124,6 +135,16 @@ public class StatisticsFragment extends Fragment {
 
     private void onClickStatisticsAny() {
         pickTimeDuration();
+        setPieChart(0, 100, 0);
+        tvTotalCheckIn.setText(String.valueOf(0));
+        tvTotalCheckOut.setText(String.valueOf(0));
+        tvNewBooking.setText(String.valueOf(0));
+        tvSourceBooking.setText(String.valueOf(0));
+        BarChartItem[] barChartItems = new BarChartItem[100];
+        for (int i = 0; i < barChartItems.length; i++) {
+            barChartItems[i] = new BarChartItem();
+        }
+        setValueBarChart(barChartItems, 100);
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
