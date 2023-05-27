@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.abc.R;
@@ -44,14 +47,18 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class StatisticsFragment extends Fragment {
 
     private TextView tvMaintenanceValue, tvAvailableValue, tvOccupiedValue, tvWeekCurrent,
-            tvTotalCheckOut, tvTotalCheckIn, tvWMY, tvNewBooking, tvSourceBooking;
-    private AppCompatRadioButton rdWeekly, rdMonthly, rdYearly;
+            tvTotalCheckOut, tvTotalCheckIn, tvWMY, tvNewBooking, tvSourceBooking, tvPickDateStart,tvPickDateEnd;
+    private AppCompatRadioButton rdWeekly, rdMonthly, rdYearly, rdAny;
+    private AppCompatButton btnApply;
+    private String stringDateStart, stringDateEnd;
     private PieChart pieChart;
     private BarChart barChart;
+    private CardView cvPickDate;
     private ArrayList<BarEntry> barEntriesList;
     private DatabaseReference timeRoomBookedRef = FirebaseDatabase.getInstance().getReference("time_room_booked");
     private DatabaseReference infoRoomBookedRef = FirebaseDatabase.getInstance().getReference("statistics_room");
@@ -69,34 +76,71 @@ public class StatisticsFragment extends Fragment {
         rdWeekly = view.findViewById(R.id.rdWeekly);
         rdMonthly = view.findViewById(R.id.rdMonthly);
         rdYearly = view.findViewById(R.id.rdYearly);
+        rdAny = view.findViewById(R.id.rdAny);
         tvTotalCheckIn = view.findViewById(R.id.tvTotalCheckIn);
         tvTotalCheckOut = view.findViewById(R.id.tvTotalCheckOut);
         tvWMY = view.findViewById(R.id.tvWMY);
         tvNewBooking = view.findViewById(R.id.tvNewBooking);
         tvSourceBooking = view.findViewById(R.id.tvSourceBooking);
 
+        cvPickDate = view.findViewById(R.id.cvPickDate);
+        btnApply = view.findViewById(R.id.btnApply);
+        tvPickDateStart = view.findViewById(R.id.tvPickDateStart);
+        tvPickDateEnd = view.findViewById(R.id.tvPickDateEnd);
+
+
         barEntriesList = new ArrayList<>();
         statisticsWeek();
-
         rdWeekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvPickDate.setVisibility(View.GONE);
                 onClickStatisticsByWeek();
             }
         });
         rdMonthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvPickDate.setVisibility(View.GONE);
                 onClickStatisticsByMonth();
             }
         });
         rdYearly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cvPickDate.setVisibility(View.GONE);
                 onClickStatisticsByYear();
             }
         });
+        rdAny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cvPickDate.setVisibility(View.VISIBLE);
+                onClickStatisticsAny();
+            }
+        });
         return view;
+    }
+
+    private void onClickStatisticsAny() {
+        pickTimeDuration();
+        btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (stringDateEnd!=null && stringDateStart != null) {
+                    int numberOfDate = getNumberOfDate(stringDateStart, stringDateEnd) + 1;
+                    if (numberOfDate > 0) {
+                        statisticsAny();
+                    }
+                    else {
+                        Toast.makeText(getContext(), "End date must be greater than start date!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Choose date for statistics!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void onClickStatisticsByYear() {
@@ -403,6 +447,106 @@ public class StatisticsFragment extends Fragment {
         });
     }
 
+    private void statisticsAny() {
+        timeRoomBookedRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int occupiedValue = 0, maintenanceValue = 0;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateStart = null, dateEnd = null;
+                try {
+                    dateStart = dateFormat.parse(stringDateStart);
+                    dateEnd = dateFormat.parse(stringDateEnd);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                for (DataSnapshot typeRoomSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot idRoomSnapshot : typeRoomSnapshot.getChildren()) {
+                        for (DataSnapshot timeSnapshot : idRoomSnapshot.getChildren()) {
+                            String time = timeSnapshot.getValue(String.class);
+                            Date date;
+                            try {
+                                assert time != null;
+                                date = dateFormat.parse(time);
+                                assert date != null;
+                                if (date.compareTo(dateStart) >= 0 && date.compareTo(dateEnd) <= 0) {
+                                    occupiedValue++;
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+                int numberOfDate = getNumberOfDate(stringDateStart, stringDateEnd) + 1;
+                setPieChart(100 * occupiedValue / (numberOfDate * 18),
+                        100 - 100 * occupiedValue / (numberOfDate * 18), maintenanceValue);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        infoRoomBookedRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date dateStart = null, dateEnd = null;
+                try {
+                    dateStart = dateFormat.parse(stringDateStart);
+                    dateEnd = dateFormat.parse(stringDateEnd);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                BarChartItem[] barChartItems = new BarChartItem[100];
+                for (int i = 0; i < barChartItems.length; i++) {
+                    barChartItems[i] = new BarChartItem();
+                }
+                int totalCheckIn = 0, totalCheckOut = 0;
+                int index = 0;
+                for (DataSnapshot roomSnapshot : snapshot.getChildren()) {
+                    int count = 0;
+                    for (DataSnapshot infoRoomBooked : roomSnapshot.getChildren()) {
+                        InfoRoomBookedModel infoRoomBookedModel = (InfoRoomBookedModel) infoRoomBooked.getValue(InfoRoomBookedModel.class);
+                        if (infoRoomBookedModel != null) {
+                            String StringDateArrive = infoRoomBookedModel.getDateArrive();
+                            String StringDateLeave = infoRoomBookedModel.getDateLeave();
+                            Date dateArrive = null, dateLeave = null;
+                            try {
+                                dateArrive = dateFormat.parse(StringDateArrive);
+                                dateLeave = dateFormat.parse(StringDateLeave);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if (dateArrive.compareTo(dateStart) >= 0 && dateArrive.compareTo(dateEnd) <= 0) {
+                                totalCheckIn++;
+                                count++;
+                            }
+                            if (dateLeave.compareTo(dateStart) >= 0 && dateLeave.compareTo(dateEnd) <= 0) {
+                                totalCheckOut++;
+                            }
+                        }
+                    }
+                    barChartItems[index].setHeight(count);
+                    barChartItems[index].setRoomId(roomSnapshot.getKey());
+                    index++;
+                }
+                tvTotalCheckIn.setText(String.valueOf(totalCheckIn));
+                tvTotalCheckOut.setText(String.valueOf(totalCheckOut));
+                tvNewBooking.setText(String.valueOf(totalCheckIn));
+                tvSourceBooking.setText(String.valueOf(totalCheckIn));
+                setValueBarChart(barChartItems, index);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void setPieChart(int occupiedValue, int availableValue, int maintenanceValue) {
         String s1 = occupiedValue + "%";
         String s2 = availableValue + "%";
@@ -475,5 +619,58 @@ public class StatisticsFragment extends Fragment {
         barChart.setDrawGridBackground(false);
 
         barChart.invalidate();
+    }
+    public int getNumberOfDate(String start, String end) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate = new Date();
+        Date endDate = new Date();
+        try {
+            startDate = sdf.parse(start);
+            endDate = sdf.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long differenceInMilliseconds = endDate.getTime() - startDate.getTime();
+        long differenceInDays = TimeUnit.MILLISECONDS.toDays(differenceInMilliseconds);
+        return (int) differenceInDays;
+    }
+    private void pickTimeDuration() {
+        tvPickDateStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        stringDateStart = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        tvPickDateStart.setText(stringDateStart);
+                    }
+                }, year, month, day);
+                dpd.show(getChildFragmentManager(), "DatePickerDialog");
+            }
+        });
+
+        tvPickDateEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        stringDateEnd = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        tvPickDateEnd.setText(stringDateEnd);
+                    }
+                }, year, month, day);
+                dpd.show(getChildFragmentManager(), "DatePickerDialog");
+            }
+        });
     }
 }

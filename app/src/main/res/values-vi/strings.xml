@@ -58,4 +58,5 @@
     <string name="please_enter_password">Hãy nhập mật khẩu</string>
     <string name="please_enter_confirm_password">Hãy nhập xác nhân mật khẩu</string>
     <string name="confirm_password_is_not_equal_password">Mật khẩu xác nhận không trùng khớp</string>
+    <string name="selection_date">Chọn ngày</string>
 </resources>

@@ -164,7 +164,7 @@ public class UserInfoActivity extends AppCompatActivity {
         readUserInfo(uid);
 
         edtUserEmail.setText(email);
-        Glide.with(this).load(photoUrl).error(R.drawable.user_default).into(userImage);
+
     }
 
     private void readUserInfo(String uid) {
@@ -181,9 +181,11 @@ public class UserInfoActivity extends AppCompatActivity {
                         String name = String.valueOf(dataSnapshot.child("userName").getValue());
                         String address = String.valueOf(dataSnapshot.child("address").getValue());
                         String phone = String.valueOf(dataSnapshot.child("phone").getValue());
+                        String imageURL = String.valueOf(dataSnapshot.child("imageURL").getValue());
                         edtUserName.setText(user.getDisplayName());
                         edtUserAddress.setText(address);
                         edtUserPhone.setText(phone);
+                        Glide.with(UserInfoActivity.this).load(imageURL).error(R.drawable.user_default).into(userImage);
                     }
                 }
             }

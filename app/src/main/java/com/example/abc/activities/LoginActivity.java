@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private boolean isRegistrationClickable = false;
+    private LinearLayout llForgotPassword, llSignUp;
     private final int MAX_LOGIN_ATTEMPTS = 5;
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
     @Override
@@ -57,12 +58,14 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initUI();
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickSingIn();
             }
         });
+
         inputChange();
     }
 
@@ -159,5 +162,16 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         tvEmailError = findViewById(R.id.tvEmailError);
         tvPasswordError = findViewById(R.id.tvPasswordError);
+    }
+
+    private String hash(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            return new String(digest);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
